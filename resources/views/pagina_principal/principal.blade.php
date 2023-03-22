@@ -32,19 +32,15 @@
     
     <div class="row align-items-center">
       <div class="col">
-        <div class="imagenes">
-            <img src="img/4.jpg" class="rounded mx-auto d-block conborde bandera " alt="...">
-        </div>  
+            <img src="img/4.jpg" class=" conborde " alt="..." >
+            <h5></h5>
       </div>
       <div class="col">
-        <div class="imagenes">
-            <img src="img/4.jpg" class="rounded mx-auto d-block conborde" alt="...">
-        </div>
+        
+            <img src="img/4.jpg" class=" conborde" alt="..." >
       </div>
       <div class="col">
-        <div class="imagenes">
-            <img src="img/4.jpg" class="rounded mx-auto d-block conborde" alt="...">
-        </div>
+            <img src="img/4.jpg" class=" conborde" alt="...">
       </div>
     </div>
     

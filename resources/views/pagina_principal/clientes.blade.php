@@ -5,6 +5,7 @@
         <div class="container_x">
             <p >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis ipsa voluptatum dolorem laborum illum et maxime placeat voluptatem. Velit deserunt consequuntur sequi explicabo delectus officia perspiciatis quod hic qui ipsa.</p>
         </div>
+        <div class="container-s">
         <div class="row">
             <div class="col ">
                     <img src="img/dlpz.png" alt="Imagen" class="">                   
@@ -59,6 +60,7 @@
             <div class="col"> 
                     <img src="img/sinchi_wayra.jpg" alt="Imagen" class="">                   
             </div>
+        </div>
         </div>
     </div>
 @endsection

@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pagina_principal/principal');
 });
+Route::get('/w', function () {
+    return view('welcome');
+});
+Route::get('/dash', function () {
+    return view('dashboard/administrador/index');
+});
 
 Route::get('/quienes_somos', function () {
     return view('pagina_principal/quienes_somos');
@@ -26,3 +32,6 @@ Route::get('/servicios', function () {
 Route::get('/clientes', function () {
     return view('pagina_principal/clientes');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
