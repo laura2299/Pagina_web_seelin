@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::get('/w', function () {
 Route::get('/dash', function () {
     return view('dashboard/administrador/index');
 });
+Route::get('/indexM', function () {
+    return view('dashboard/Media/index');
+});
 
 Route::get('/quienes_somos', function () {
     return view('pagina_principal/quienes_somos');
@@ -35,3 +39,5 @@ Route::get('/clientes', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// ruta para ver lo relacionado con media
+Route::resource('administrador/media', MediaController::class);
