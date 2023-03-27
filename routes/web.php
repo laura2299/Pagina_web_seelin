@@ -36,6 +36,21 @@ Route::get('/servicios', function () {
 Route::get('/clientes', function () {
     return view('pagina_principal/clientes');
 });
+Route::get('/proyectos', function () {
+    return view('pagina_principal/proyectos');
+});
+Route::get('/contactanos', function () {
+    return view('pagina_principal/contactanos');
+});
+Route::get('/inicio_sesion', function () {
+    return view('pagina_principal/inicio_sesion');
+});
+Route::get('/cambio_contraseña', function () {
+    return view('pagina_principal/cambio_contraseña');
+});
+Route::get('/documentos', function () {
+    return view('pagina_principal/documentos');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
