@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ArchivoController;
+use App\Http\Controllers\CapacitacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,11 +23,9 @@ Route::get('/w', function () {
     return view('welcome');
 });
 Route::get('/dash', function () {
-    return view('dashboard/administrador/index');
+    return view('dashboard/index');
 });
-Route::get('/indexM', function () {
-    return view('dashboard/Media/index');
-});
+
 
 Route::get('/quienes_somos', function () {
     return view('pagina_principal/quienes_somos');
@@ -55,4 +55,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // ruta para ver lo relacionado con media
-Route::resource('administrador/media', MediaController::class);
+Route::resource('administrador/media', MediaController::class)->names('admin.archivosmedia');
+
+// ruta para ver lo relacionado con archivos
+Route::resource('administrador/documentos', ArchivoController::class)->names('admin.documentos');
+
+// ruta para ver lo relacionado con archivos
+Route::resource('administrador/capacitaciones', CapacitacionController::class)->names('admin.capacitaciones');
+

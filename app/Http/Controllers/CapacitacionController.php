@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Archivo;
-use Carbon\Carbon;
+use App\Models\Capacitacion;
 use Illuminate\Http\Request;
 
-class ArchivoController extends Controller
+class CapacitacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class ArchivoController extends Controller
      */
     public function index()
     {
-        $Archivos = Archivo::all();
-        return view('dashboard/documentos/index',compact('Archivos'));
+        $capacitacion = Capacitacion::all();
+        return view('dashboard/documentos/index',compact('capacitacion'));
     }
 
     /**
@@ -26,7 +25,7 @@ class ArchivoController extends Controller
      */
     public function create()
     {
-        return view('dashboard/documentos/create');
+        //
     }
 
     /**
@@ -37,18 +36,7 @@ class ArchivoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $miarchivo = new Archivo();
-        $miarchivo->name = $request->file('archivo')->getClientOriginalName();
-        $array = explode('public',$request->file('archivo')->store('public/files'));
-        $miarchivo->path = 'storage'.$array[1];
-        $miarchivo->format = $request->file('archivo')->getClientOriginalExtension();
-        $miarchivo->fecha_subida= Carbon::now();
-        $miarchivo->categoria = $request->categoria;
-        $miarchivo->fecha = $request->fecha;
-        $miarchivo->estado = "habilitado";
-        $miarchivo->save();
-        return redirect('administrador/documentos');
+        //
     }
 
     /**
@@ -59,7 +47,7 @@ class ArchivoController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -70,8 +58,7 @@ class ArchivoController extends Controller
      */
     public function edit($id)
     {
-        $archivo=Archivo::findOrFail($id);
-        return view('dashboard/documentos/edit',compact('archivo'));
+        //
     }
 
     /**
@@ -83,12 +70,7 @@ class ArchivoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $archivo=Archivo::findOrFail($id);
-        $archivo->estado=$request->estado;
-        $archivo->fecha = $request->fecha;
-        $archivo->save();
-        return redirect('administrador/documentos');
-
+        //
     }
 
     /**
@@ -98,10 +80,7 @@ class ArchivoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
-        Archivo::destroy($id);
-        
-        return redirect()->route('admin.documentos.index');
-        
+    {
+        //
     }
 }

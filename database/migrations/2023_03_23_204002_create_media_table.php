@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('descripcion');
             $table->string('categoria');
-            $table->boolean('estado');
+            $table->string('estado');
             $table->timestamps();
         });
     }

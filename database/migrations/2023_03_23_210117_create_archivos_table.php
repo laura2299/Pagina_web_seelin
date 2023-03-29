@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('format');
-            $table->string('fecha_subida');
+            $table->string('path');
+            $table->dateTime('fecha_subida');
             $table->string('categoria');
-            $table->string('fecha');
+            $table->dateTime('fecha');
             $table->string('estado');
             
             $table->timestamps();

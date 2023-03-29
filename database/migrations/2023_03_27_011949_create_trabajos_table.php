@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('actividad');
             $table->dateTime('fecha_inicio')->nullable();
             $table->string('categoria');
-            $table->boolean('estado');
+            $table->string('estado');
             $table->unsignedBigInteger('id_cliente')->nullable();
 
             $table->foreign('id_cliente')

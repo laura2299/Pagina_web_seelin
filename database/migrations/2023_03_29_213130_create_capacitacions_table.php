@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('imagens', function (Blueprint $table) {
+        Schema::create('capacitacions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('archivo');
+            $table->string('espositor');
+            $table->string('titulo');
+            $table->date('fecha');
             $table->string('estado');
             $table->timestamps();
-            $table->unsignedBigInteger('id_media')->nullable();
-
-            $table->foreign('id_media')
-            ->references('id')
-            ->on('media');
         });
     }
 
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imagens');
+        Schema::dropIfExists('capacitacions');
     }
 };

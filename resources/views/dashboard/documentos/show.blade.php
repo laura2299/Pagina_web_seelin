@@ -7,7 +7,10 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>vista del show de documento</p>
+    
+    
+
 @stop
 
 @section('css')

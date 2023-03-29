@@ -14,8 +14,8 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $medias=Media::paginate(15);
-        return view('dashboard.media.index',$medias);
+        $medias=Media::all();
+        return view('dashboard/media/index',compact('medias') );
     }
 
     /**
@@ -25,7 +25,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard/media/create');
     }
 
     /**
@@ -36,7 +36,13 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Media = new Media();
+        $Media->name = $request->name;
+        $Media->descripcion = $request->descripcion;
+        $Media->categoria = $request->categoria;
+        $Media->estado = $request->estado;
+        $Media->save();
+        return redirect()->route('admin.archivosmedia.index');
     }
 
     /**
@@ -58,7 +64,8 @@ class MediaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $media=Media::findOrFail($id);
+        return view('dashboard/media/edit',compact('media'));
     }
 
     /**
@@ -70,7 +77,13 @@ class MediaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Media=Media::findOrFail($id);
+        $Media->name = $request->name;
+        $Media->descripcion = $request->descripcion;
+        $Media->categoria = $request->categoria;
+        $Media->estado = $request->estado;
+        $Media->save();
+        return redirect()->route('admin.archivosmedia.index');
     }
 
     /**
@@ -81,6 +94,8 @@ class MediaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Media::destroy($id);
+        
+        return redirect()->route('admin.archivosmedia.index');
     }
 }
