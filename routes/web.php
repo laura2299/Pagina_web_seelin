@@ -39,7 +39,7 @@ Route::get('/contactanos', function () {
     return view('pagina_principal/contactanos');
 });
 Route::get('/inicio_sesion', function () {
-    return view('pagina_principal/inicio_sesion');
+    return view('pagina_principal/inicio_sesion')->names('inicio');
 });
 Route::get('/cambio_contraseña', function () {
     return view('pagina_principal/cambio_contraseña');

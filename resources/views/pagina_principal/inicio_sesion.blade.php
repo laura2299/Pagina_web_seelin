@@ -67,8 +67,10 @@
 						<input type="text" name="Usuario" id="Usuario">
 					</label>
 					<label for="Contraseña">
+						<!--
 						<span>Contraseña:</span>
-						<input type="password" name="Contraseña" id="Contraseña">
+						<input type="password" name="Contraseña" id="Contraseña">-->
+						{{ __('Password') }}
 					</label>
 					<input id="btn_ing" type="button" value="Ingresar">
 				</form>
