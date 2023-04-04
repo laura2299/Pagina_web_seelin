@@ -209,10 +209,10 @@
             </div>
             <div id="sesion">
                 <div class="icono" id="mnc">
-                    <a href="/Pagina_web_seelin/public/">Cerrar Sesión</a>
-                    <a href="/Pagina_web_seelin/public/cambio_contraseña">Configuración</a>
-                    <a href="/Pagina_web_seelin/public/documentos">Documentos</a>
-                    <a href="/Pagina_web_seelin/public/inicio_sesion">Inicio Sesion</a>
+                    <a href="{{ route('principal') }}" >Cerrar Sesión</a>
+                    <a href="{{ route('cambio_contraseña') }}">Configuración</a>
+                    <a href="{{ route('documentos') }}">Documentos</a>
+                    <a href="{{ route('inicio_sesion') }}">Inicio Sesion</a>
                 </div>  
                 <a href="javascript:void(0);" class="iconito" onclick="miFun2()"><ion-icon name="person-circle-outline"></ion-icon></a>
                 
@@ -223,17 +223,17 @@
 
           <div class="container-fluid row">
             <div id="logo_se" class="col-2 bg-white">
-                <a  href="/Pagina_web_seelin/public/">
+                <a  href="{{ route('principal') }}">
                   <img id="logo" src="img/logoselin2.png" alt="Logo Seelin" >
                 </a> 
             </div>
             <div class="col-10 d-flex flex-row-reverse">
               <div class="cat " id="c">
-                  <a href="/Pagina_web_seelin/public/" class="active">Inicio</a> 
-                  <a href="/Pagina_web_seelin/public/quienes_somos">Quienes Somos</a>
-                  <a href="/Pagina_web_seelin/public/servicios">Servicios</a>
-                  <a href="/Pagina_web_seelin/public/clientes">Clientes</a>
-                  <a href="/Pagina_web_seelin/public/proyectos">Proyectos</a>
+                  <a href="{{ route('principal') }}" class="@if(Request::is('/')) active @endif">Inicio</a> 
+                  <a href="{{ route('quienes_somos') }}" class="@if(Request::is('quienes_somos')) active @endif">Quienes Somos</a>
+                  <a href="{{ route('servicios') }}" class="@if(Request::is('servicios')) active @endif">Servicios</a>
+                  <a href="{{ route('clientes') }}" class="@if(Request::is('clientes')) active @endif">Clientes</a>
+                  <a href="{{ route('proyectos') }}" class="@if(Request::is('proyectos')) active @endif">Proyectos</a>
                   <a href="javascript:void(0);" class="icon" onclick="miFun()">
                     <ion-icon name="reorder-four-outline"></ion-icon>
                   </a>
@@ -301,8 +301,7 @@
             .lin_azul{
                 border-top:8px solid #24315E;
                 border-bottom:8px solid #24315E;
-                border-left:8px solid #24315E;
-                border-right:none;
+                
                 padding-bottom:15px;
                 padding-top:15px;
             }

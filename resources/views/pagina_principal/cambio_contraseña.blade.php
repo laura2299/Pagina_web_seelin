@@ -13,6 +13,7 @@
 			background-color: white;
 			min-width: 400px;
 			max-width: 600px;
+			margin:30px;
 		}
 		.contact h1{
 			color:#16979A;
