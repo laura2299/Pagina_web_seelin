@@ -14,8 +14,8 @@ class CapacitacionController extends Controller
      */
     public function index()
     {
-        $capacitacion = Capacitacion::all();
-        return view('dashboard/documentos/index',compact('capacitacion'));
+        $capacitaciones = Capacitacion::all();
+        return view('dashboard/capacitaciones/index',compact('capacitaciones'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CapacitacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard/capacitaciones/create');
     }
 
     /**
@@ -36,7 +36,13 @@ class CapacitacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $capacitacion = new Capacitacion();
+        $capacitacion->expositor = $request->expositor;
+        $capacitacion->titulo = $request->titulo;
+        $capacitacion->fecha=$request->fecha;
+        $capacitacion->estado=$request->estado;
+        $capacitacion->save();
+        return redirect()->route('admin.capacitaciones.index');
     }
 
     /**
@@ -58,7 +64,8 @@ class CapacitacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Capacitacion=Capacitacion::findOrFail($id);
+        return view('dashboard/capacitaciones/edit',compact('Capacitacion'));
     }
 
     /**
@@ -70,7 +77,13 @@ class CapacitacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Capacitacion=Capacitacion::findOrFail($id);
+        $Capacitacion->expositor = $request->expositor;
+        $Capacitacion->titulo = $request->titulo;
+        $Capacitacion->fecha=$request->fecha;
+        $Capacitacion->estado=$request->estado;
+        $Capacitacion->save();
+        return redirect()->route('admin.capacitaciones.index');
     }
 
     /**
@@ -81,6 +94,8 @@ class CapacitacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Capacitacion::destroy($id);
+        
+        return redirect()->route('admin.capacitaciones.index');
     }
 }

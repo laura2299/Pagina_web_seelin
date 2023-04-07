@@ -1,5 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Nuevo Usuario</h1>
+@stop
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

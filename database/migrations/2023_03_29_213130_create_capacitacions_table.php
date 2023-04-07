@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('capacitacions', function (Blueprint $table) {
             $table->id();
-            $table->string('espositor');
+            $table->string('expositor');
             $table->string('titulo');
             $table->date('fecha');
             $table->string('estado');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imagen;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class ImagenController extends Controller
@@ -13,7 +15,8 @@ class ImagenController extends Controller
      */
     public function index()
     {
-        //
+        $imagenes= Imagen::all();
+        return view('dashboard/imagenes/index',compact('imagenes'));
     }
 
     /**
@@ -22,10 +25,18 @@ class ImagenController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $media = Media::all()->pluck('name','id');
+        return view('dashboard/imagenes/create',compact('media'));
+        
     }
 
+    public function crear_imagen(Media $id)
+    {   
+        $media = Media::findOrFail($id);
+        return view('dashboard/documentos/create');
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +45,18 @@ class ImagenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $imagen = new Imagen();
+        
+        $imagen->name =$request->file('archivo')->getClientOriginalName();
+        $array = explode('public',optional($request->file('archivo'))->store('public/files'));
+        $imagen->archivo ='storage'.$array[1];
+        
+        $imagen->estado= $request->estado;
+        $imagen->id_media= $request->id_media;
+        $imagen->save();
+        $imagenes= Imagen::all();
+        return view('dashboard/imagenes/index',compact('imagenes'));
     }
 
     /**

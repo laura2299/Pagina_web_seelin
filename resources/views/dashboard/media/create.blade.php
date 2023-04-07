@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>create</h1>
+    <h1>Crear Nuevo</h1>
 @stop
 
 @section('content')
@@ -41,12 +41,14 @@
                     deshabilitado
                 </label>
                 <br>
-                <input type="submit" value="Enviar">
+                <input type="submit" value="Crear Media" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se creara el nuevo registro, ¿esta seguro?')">
+
               </form>
               
         </div>
     </div>
     
+  
     
 
 @stop
@@ -60,10 +62,10 @@
     <script>
         // Función para limitar la selección a una sola opción
         function limitarSeleccion(elem) {
-          var categoria = document.getElementsByName("categoria");
-          for (var i = 0; i < categoria.length; i++) {
-            if (categoria[i] !== elem) {
-              categoria[i].checked = false;
+          var estado = document.getElementsByName("estado");
+          for (var i = 0; i < estado.length; i++) {
+            if (estado[i] !== elem) {
+              estado[i].checked = false;
             }
           }
         }

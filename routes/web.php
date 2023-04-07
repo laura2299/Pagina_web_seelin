@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\CapacitacionController;
+use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +62,11 @@ Route::resource('administrador/media', MediaController::class)->names('admin.arc
 // ruta para ver lo relacionado con archivos
 Route::resource('administrador/documentos', ArchivoController::class)->names('admin.documentos');
 
-// ruta para ver lo relacionado con archivos
+// ruta para ver lo relacionado con capacitaciones
 Route::resource('administrador/capacitaciones', CapacitacionController::class)->names('admin.capacitaciones');
 
+// ruta para ver lo relacionado con iimagenes
+Route::resource('administrador/media/imagenes', ImagenController::class)->names('admin.imagenes');
+
+// ruta para ver lo relacionado con users
+Route::resource('administrador/users', UserController::class)->names('admin.users');

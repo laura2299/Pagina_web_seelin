@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Imagen;
-use App\Models\Media;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class MediaController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $medias=Media::all();
-        return view('dashboard/media/index',compact('medias') );
+        $users=User::all();
+        return view('dashboard/users/index',compact('users'));
     }
 
     /**
@@ -26,7 +25,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        return view('dashboard/media/create');
+        //
     }
 
     /**
@@ -37,13 +36,7 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        $Media = new Media();
-        $Media->name = $request->name;
-        $Media->descripcion = $request->descripcion;
-        $Media->categoria = $request->categoria;
-        $Media->estado = $request->estado;
-        $Media->save();
-        return redirect()->route('admin.archivosmedia.index');
+        //
     }
 
     /**
@@ -65,9 +58,7 @@ class MediaController extends Controller
      */
     public function edit($id)
     {
-        $imagenes = Imagen::where('id_media', $id);
-        $media=Media::findOrFail($id);
-        return view('dashboard/media/edit',compact('media','imagenes'));
+        //
     }
 
     /**
@@ -79,13 +70,7 @@ class MediaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Media=Media::findOrFail($id);
-        $Media->name = $request->name;
-        $Media->descripcion = $request->descripcion;
-        $Media->categoria = $request->categoria;
-        $Media->estado = $request->estado;
-        $Media->save();
-        return redirect()->route('admin.archivosmedia.index');
+        //
     }
 
     /**
@@ -96,8 +81,6 @@ class MediaController extends Controller
      */
     public function destroy($id)
     {
-        Media::destroy($id);
-        
-        return redirect()->route('admin.archivosmedia.index');
+        //
     }
 }

@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>create</h1>
+    <h1>Editar</h1>
 @stop
 
 @section('content')
@@ -47,16 +47,22 @@
                     deshabilitado
                 </label>
                 <br>
+                
                 <input type="submit" value="validar datos" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se editaran los campos, ¿esta seguro?')">
               </form>
+             
+              <br>
               <div class="col-md-6" >
                 <a href="{{route('admin.archivosmedia.index')}}"  class="btn btn-danger"  role="button" style="width: 150px">Cancelar</a>
+              </div>
+              <br>
               
-            </div>
+
               
         </div>
     </div>
     
+   
     
 
 @stop

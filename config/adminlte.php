@@ -326,7 +326,7 @@ return [
                 ],
                 [
                     'text' => 'capacitaciones',
-                    'url'  => 'admin.capacitaciones.index',
+                    'route'  => 'admin.capacitaciones.index',
                 ],
                 
             ],
@@ -334,7 +334,7 @@ return [
         ['header' => 'Configuracion de Cuentas'],
         [
             'text' => 'Usuarios',
-            'url'  => 'admin/settings',
+            'route'  => 'admin.users.index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

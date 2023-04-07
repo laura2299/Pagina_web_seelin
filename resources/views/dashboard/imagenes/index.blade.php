@@ -3,38 +3,38 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>index de Media proyectos y mas</h1>
+    <h1>Lista de Imagenes</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a class="btn btn-primary" href="{{route('admin.archivosmedia.create')}}">Nuevo</a>
+            <a class="btn btn-primary" href="{{route('admin.imagenes.create')}}">Nueva imagen</a>
         </div>
-        <div class="col-md-6" >
-            <a href="{{route('admin.imagenes.create')}}"  class="btn btn-secondary"  role="button" style="width: 150px">agregar imagenes</a>
-          </div>
+        
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Categoria</th>
                         <th>Estado</th>
+                        <th>Media</th>
+                        
                         <th colspan="2"></th>
                         
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($medias as $item)
+                    @foreach ($imagenes as $item)
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
-                            <td>{{$item->descripcion}}</td>
-                            <td>{{$item->categoria}}</td>
                             <td>{{$item->estado}}</td>
+                            <td>{{$item->media->name}}</td>
+                            <th colspan="3" class="text-center" >
+                                <img src="{{$item->archivo}}" alt="" width="300" height="200">
+                            </th>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="{{route('admin.archivosmedia.edit',$item->id)}}">Editar</a>
                             </td>
