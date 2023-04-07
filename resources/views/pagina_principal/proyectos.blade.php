@@ -7,7 +7,8 @@
                         justify-content:center;
                         padding: 10px 0px 0px 0px;
                         background:#16979A;
-                        margin:20px
+                        margin:20px;
+                        min-width: 300px;
                 }
 
                 .c_proyecto:nth-child(2n){

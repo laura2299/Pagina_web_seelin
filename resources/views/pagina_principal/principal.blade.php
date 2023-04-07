@@ -1,5 +1,14 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    .carousel-inner{
+        min-width: 300px;
+        max-height:500px;
+    }
+    .carousel-caption p{
+        text-align:center;
+    }
+</style>
 <div class="container-fluid cover-slides" >
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -16,7 +25,7 @@
                 
             </div>
             <section id="der">
-                <div class="carousel-caption d-none d-md-block   text-white transparent">
+                <div class="carousel-caption d-none d-md-block text-white transparent">
                     <h2 class="m-b-20"><strong>ADAPTANDO TUS NECESIDADES A NUESTROS OBJETIVOS</strong></h2>
                     <p class="m-b-40">Somos una empresa de servicios en el área eléctrica y electrónica,
                          conformada por profesionales con amplia experiencia en la industria.</p>
@@ -29,17 +38,21 @@
 <!-- Start About -->
 <br>
 <div class="contenedor_img">
-    
+    <style>
+        .img_p{
+            min-width: 300px;
+        }
+    </style>
     <div class="row align-items-center">
-      <div class="col">
+      <div class="col img_p">
             <img src="img/4.jpg" class=" conborde " alt="..." >
             <h5></h5>
       </div>
-      <div class="col">
+      <div class="col img_p">
         
             <img src="img/4.jpg" class=" conborde" alt="..." >
       </div>
-      <div class="col">
+      <div class="col img_p">
             <img src="img/4.jpg" class=" conborde" alt="...">
       </div>
     </div>

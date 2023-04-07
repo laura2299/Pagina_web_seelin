@@ -202,16 +202,17 @@
 
     <div id="barra_arriba">
             <div id="social">
+                <ion-icon name="logo-whatsapp"></ion-icon>
                 <ion-icon name="logo-facebook"></ion-icon>
                 <ion-icon name="globe-outline"></ion-icon>
                 <ion-icon name="mail-outline"></ion-icon>
             </div>
             <div id="sesion">
-                <a href="/Pagina_web_seelin/public/inicio_sesion">Inicio Sesion</a>
                 <div class="icono" id="mnc">
-                    <a href="/Pagina_web_seelin/public/">Cerrar Sesión</a>
-                    <a href="/Pagina_web_seelin/public/cambio_contraseña">Configuración</a>
-                    <a href="/Pagina_web_seelin/public/documentos">Documentos</a>
+                    <a href="{{ route('principal') }}" >Cerrar Sesión</a>
+                    <a href="{{ route('cambio_contraseña') }}">Configuración</a>
+                    <a href="{{ route('documentos') }}">Documentos</a>
+                    <a href="{{ route('inicio_sesion') }}">Inicio Sesion</a>
                 </div>  
                 <a href="javascript:void(0);" class="iconito" onclick="miFun2()"><ion-icon name="person-circle-outline"></ion-icon></a>
                 
@@ -222,17 +223,17 @@
 
           <div class="container-fluid row">
             <div id="logo_se" class="col-2 bg-white">
-                <a  href="/Pagina_web_seelin/public/">
-                  <img id="logo" src="img/logo.png" alt="Logo Seelin" >
+                <a  href="{{ route('principal') }}">
+                  <img id="logo" src="img/logoselin2.png" alt="Logo Seelin" >
                 </a> 
             </div>
             <div class="col-10 d-flex flex-row-reverse">
               <div class="cat " id="c">
-                  <a href="/Pagina_web_seelin/public/" class="active">Inicio</a> 
-                  <a href="/Pagina_web_seelin/public/quienes_somos">Quienes Somos</a>
-                  <a href="/Pagina_web_seelin/public/servicios">Servicios</a>
-                  <a href="/Pagina_web_seelin/public/clientes">Clientes</a>
-                  <a href="/Pagina_web_seelin/public/proyectos">Proyectos</a>
+                  <a href="{{ route('principal') }}" class="@if(Request::is('/')) active @endif">Inicio</a> 
+                  <a href="{{ route('quienes_somos') }}" class="@if(Request::is('quienes_somos')) active @endif">Quienes Somos</a>
+                  <a href="{{ route('servicios') }}" class="@if(Request::is('servicios')) active @endif">Servicios</a>
+                  <a href="{{ route('clientes') }}" class="@if(Request::is('clientes')) active @endif">Clientes</a>
+                  <a href="{{ route('proyectos') }}" class="@if(Request::is('proyectos')) active @endif">Proyectos</a>
                   <a href="javascript:void(0);" class="icon" onclick="miFun()">
                     <ion-icon name="reorder-four-outline"></ion-icon>
                   </a>
@@ -264,6 +265,8 @@
         @yield('content') @section('content')
 
         <!---footer---> 
+        <!--Footer 1-->
+        <!--
         <footer>
             <div class="linea"></div>
             <div class="container__footer">
@@ -271,7 +274,6 @@
                     <div class="logo">
                         <img src="img/logoselin2.png" alt="">
                     </div>
-                    
                 </div>
                 <div class="box__footer">
                     <h4>Cels.: (591) 77527110 – 75810501 – 75810503</h4>
@@ -283,14 +285,93 @@
 
                     <a href="/Pagina_web_seelin/public/contactanos" class="btn btn-personalizado btn-lg " style="color:#ffffff;">Contactanos</a>
                 </div>
-                
-                
             </div>
             <div class="linea"></div>
             <div class="container-fluid bg-light text-center">
                 <p class="small " style="text-align:center">Calle Roberto Hinojosa Nº 1875, Zona San Antonio, La Paz Bolivia.</p>
             </div>
         </footer> 
+                -->
+        <!--Footer 1-->
+        <style>
+            footer{
+                padding: 0px;
+                background: white;
+            }
+            .lin_azul{
+                border-top:8px solid #24315E;
+                border-bottom:8px solid #24315E;
+                
+                padding-bottom:15px;
+                padding-top:15px;
+            }
+            .logo_f{
+                display:flex;
+                min-width:300px;
+                justify-content:center;
+            }
+            .logo_f img{
+                width:100%;
+            }
+            .datos_f{
+                min-width: 400px;
+                display:flex;
+                flex-direction:column;
+                align-items: center;
+                margin: 10px 0px 10px 0px;
+            }
+            .datos_f p{
+                text-align:center;
+            }
+            .contactanos_f{
+                display:flex;
+                justify-content:center;
+                align-items: center;
+                flex-direction:column;
+                min-width: 300px;
+                margin-bottom:10px;
+            }
+            .contactanos_f a{
+                padding:10px;
+                font-size:large;
+               color:white;
+                text-decoration:none;
+                border-radius:8px;
+                background: #16979A;
+                width:100%;
+                text-align:center;
+                height:fit-content;
+            }
+            .contactanos_f a ion-icon{
+                height:60%;
+            }
+            .fin h6{
+                margin-top:10px;
+                text-align:center;
+            }
+        </style>
+        <footer>
+            <div class="conteiner-fluid">
+                <div class="row lin_azul">
+                  <div class="logo_f col-3">
+                        <img src="img/logoselin2.png" alt="logo Seelin">
+                  </div>
+                  <div class="datos_f col-4">
+                    <p>Cels.: (591) 77527110 – 75810501 – 75810503</p>
+                    <p>Telf./Fax.: (591-2) 2233910 – 2232362</p>
+                    <p>info@seelin.bo</p>
+                  </div>
+                  <div class="contactanos_f col-3">
+                    <a href="/Pagina_web_seelin/public/contactanos">Contactanos</a>
+                    <br>
+                    <a href="#"><ion-icon name="logo-whatsapp"></ion-icon>   WhatsApp</a>
+                  </div>
+                </div>
+                <div class="row fin">
+                    <h6>Calle Roberto Hinojosa Nº 1875, Zona San Antonio, La Paz Bolivia.</h6>
+                </div>
+            </div>
+        </footer>
             <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
