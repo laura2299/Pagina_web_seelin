@@ -3,16 +3,18 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>index de Media proyectos y mas</h1>
+    <h1>Lista de Media proyectos y mas</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary" href="{{route('admin.archivosmedia.create')}}">Nuevo</a>
+            <a href="{{route('admin.imagenes.create')}}"  class="btn btn-secondary"  role="button" style="width: 150px">agregar imagenes</a>
+            <a class="btn btn-primary" href="{{route('admin.imagenes.index')}}" class="btn btn-primary">Imagenes</a>
+
         </div>
         <div class="col-md-6" >
-            <a href="{{route('admin.imagenes.create')}}"  class="btn btn-secondary"  role="button" style="width: 150px">agregar imagenes</a>
           </div>
         <div class="card-body">
             <table class="table table-striped">

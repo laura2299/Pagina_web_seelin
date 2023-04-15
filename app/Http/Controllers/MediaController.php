@@ -36,7 +36,13 @@ class MediaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request->validate([
+            'name'=>'required',
+            'descripcion'=>'required',
+            'categoria'=> 'required',
+            'estado'=>'required'
+        ]);
         $Media = new Media();
         $Media->name = $request->name;
         $Media->descripcion = $request->descripcion;

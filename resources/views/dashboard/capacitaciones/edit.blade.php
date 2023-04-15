@@ -10,44 +10,45 @@
     <h2>Editar los siguientes campos</h2>
     <div class="row">
         <div class="col-lg-12">
-            <form action="{{route('admin.capacitaciones.update',$Capacitacion->id)}}" method="post" enctype="multipart/form-data">
-                @csrf
-                {{method_field('PATCH')}}
-                <label for="expositor">Nombre del Expositor:</label>
-                <br>
-                <input type="text" id="expositor" name="expositor" value="{{$Capacitacion->expositor}}">
-                <br>
-                <label for="titulo">Nombre de la Capacitación:</label>
-                <br>
-                <input type="text" id="titulo" name="titulo" value="{{$Capacitacion->titulo}}">
-                <br>
-                <label for="fecha">Fecha de la Capacitacion yyyy-mm-dd:</label>
-                <div class="input-group">
-                    <input type="text" class="form-control datepicker" name="fecha" value="{{$Capacitacion->fecha}}">
-                    <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-th"></span>
-                    </div>
-                </div>                                
-                <br>
-                <br>
-                <label for="estado">Estado:</label><br>
-  
-                <label class="custom-checkbox">
-                <input type="checkbox" name="estado" value="habilitado" onclick="limitarSeleccion(this)">
-                    <span class="checkmark"></span>
-                    habilitado
-                </label>
-                <label class="custom-checkbox">
-                    <input type="checkbox" name="estado" value="deshabilitado" onclick="limitarSeleccion(this)">
-                    <span class="checkmark"></span>
-                    deshabilitado
-                </label>
-                <br>
+            {!! Form::model($Capacitacion,['route'=>['admin.capacitaciones.update',$Capacitacion],'method'=>'put']) !!}
+            <!--//aun falta cambiar si el pedido lo hizo el cliente o camarero-->   
+            
+                <div class="form-group">
+                    {!! Form::label('expositor', 'Nombre Expositor') !!}
+                    {!!Form :: text ('expositor',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre del expositor'])!!}
+                    @error('expositor')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>   
+                <div class="form-group">
+                    {!! Form::label('titulo', 'Titulo de Capacitacion') !!}
+                    {!!Form :: text ('titulo', null,['class'=>'form-control','placeholder'=>'Ingrese el titulo de la capacitacion'])!!}
+                    @error('titulo')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div> 
                 
-                <br>
-                <input type="submit" value="Aceptar cambios" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se editaran los campos del registro, ¿esta seguro?')">
-
-              </form>
+               
+                <div class="form-group">
+                    {!! Form::label('fecha', 'Fecha') !!}
+                    {!! Form::date('fecha', \Carbon\Carbon::now()->format('Y-m-d')) !!}
+                    @error('fecha')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    {!! Form::label('estado', 'Estado') !!}
+                    {!!Form :: select ('estado', ['habilitado' => 'habilitado', 'deshabilitado' => 'deshabilitado'], 'habilitado',['class'=>'form-control'])!!}
+                    @error('estado')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+    
+                {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}
+    
+            {!! Form::close() !!}
+            <br>
+            
               <div class="col-md-6" >
                 <a href="{{route('admin.capacitaciones.index')}}"  class="btn btn-danger"  role="button" style="width: 150px">Cancelar</a>
               

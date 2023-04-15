@@ -3,35 +3,48 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Editar Documento</h1>
 @stop
 
 @section('content')
-    <p>vista del edit documento</p>
-    <form action="{{route('admin.documentos.update',$archivo->id)}}" method="post" enctype="multipart/form-data">
-        @csrf
-        {{method_field('PATCH')}}
-        <br><br>
-                <h5>Nombre del archivo: {{$archivo->name}}</h5>
-                <br>
-                <label for="date">Fecha yyyy/mm/dd</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control datepicker" name="fecha" value="{{$archivo->fecha}}">
-                                <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-th"></span>
-                                </div>
-                            </div>
+    
+{!! Form::model($archivo,['route'=>['admin.documentos.update',$archivo],'method'=>'put']) !!}
+    
            
-        <label for="estado">Estado:</label>
-        <select id="estado" name="estado">
-          <option value="habilitado">Habilitado</option>
-          <option value="deshabilitado">Deshabilitado</option>
-        </select>
-        <br>
-        <input type="submit" value="validar datos" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se editaran los campos, ¿esta seguro?')">
+                <div class="form-group">
+                {!! Form::label('archivo', 'archivo') !!}
+                {!! Form::file('archivo',null, array('required' => 'true'),['class'=>'form-control'])!!}
+                @error('archivo')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            <div class="form-group">
+                {!! Form::label('categoria', 'Categoria') !!}
+                {!!Form :: select ('categoria', ['correspondencia' => 'correspondencia', 'archivo' => 'archivo'], 'correspondencia',['class'=>'form-control'])!!}
+                @error('categoria')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            <div class="form-group">
+                {!! Form::label('estado', 'estado') !!}
+                {!!Form :: select ('estado', ['habilitado' => 'habilitado', 'deshabilitado' => 'deshabilitado'], 'habilitado',['class'=>'form-control'])!!}
+                @error('estado')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+           
+            <div class="form-group">
+                {!! Form::label('fecha', 'Fecha') !!}
+                {!! Form::date('fecha', \Carbon\Carbon::now()->format('Y-m-d')) !!}
+                @error('fecha')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
 
-      </form>
-      
+
+            {!! Form::submit('Editar documento', ['class' => 'btn btn-primary']) !!}
+
+        {!! Form::close() !!}
     
     
 

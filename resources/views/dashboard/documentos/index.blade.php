@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>vista del index de documento Lista</h1>
+    <h1>Lista de documentos</h1>
 @stop
 
 @section('content')

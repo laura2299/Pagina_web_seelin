@@ -8,32 +8,48 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12">
-            <form action="{{route('admin.documentos.store')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <label for="archivo">Archivo:</label>
-                <input type="file" name="archivo" id="archivo"><br><br>
-                
-                <label for="categorias">Categorías:</label>
-                <br><br>
-                <select id="categoria" name="categoria">
-                <option value="correspondencia">Correspondencia</option>
-                <option value="documento">Documento</option>
-                </select>
-                <br><br>
-                <label for="date">Fecha yyyy/mm/dd</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control datepicker" name="fecha">
-                                <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-th"></span>
-                                </div>
-                            </div>
-                            <input type="submit" value="Crear archivo" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se creara el nuevo archivo, ¿esta seguro?')">
+        <div class="col-lg-12">      
+
+    {!! Form::open(['route'=> 'admin.documentos.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+         
+            @csrf
+                <div class="form-group">
+                {!! Form::label('archivo', 'archivo') !!}
+                {!! Form::file('archivo',null, array('required' => 'true'),['class'=>'form-control'])!!}
+                @error('archivo')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            <div class="form-group">
+                {!! Form::label('categoria', 'Categoria') !!}
+                {!!Form :: select ('categoria', ['correspondencia' => 'correspondencia', 'archivo' => 'archivo'], 'correspondencia',['class'=>'form-control'])!!}
+                @error('categoria')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            <div class="form-group">
+                {!! Form::label('estado', 'estado') !!}
+                {!!Form :: select ('estado', ['habilitado' => 'habilitado', 'deshabilitado' => 'deshabilitado'], 'habilitado',['class'=>'form-control'])!!}
+                @error('estado')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
            
-      
-    </form>
+            <div class="form-group">
+                {!! Form::label('fecha', 'Fecha') !!}
+                {!! Form::date('fecha', \Carbon\Carbon::now()->format('Y-m-d')) !!}
+                @error('fecha')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+
+            {!! Form::submit('Crear documento', ['class' => 'btn btn-primary']) !!}
+
+        {!! Form::close() !!}
               
         </div>
+   
     </div>
     
     

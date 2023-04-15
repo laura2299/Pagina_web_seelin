@@ -9,43 +9,50 @@
 @section('content')
     <h2>Complete los siguientes campos</h2>
     <div class="row">
-        <div class="col-lg-12">
-            <form action="{{route('admin.archivosmedia.store')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="name">
-                <br>
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion"></textarea>
-                <br>
-                <label for="categoria">Categoría:</label>
-                <select id="categoria" name="categoria">
-                  <option value="mision">Misión</option>
-                  <option value="vision">Visión</option>
-                  <option value="quienes_somos">Quiénes Somos</option>
-                  <option value="proyectos">Proyectos</option>
-                </select>
-                <br>
-                
-                <br>
-                <label for="estado">Estado:</label><br>
-  
-                <label class="custom-checkbox">
-                <input type="checkbox" name="estado" value="habilitado" onclick="limitarSeleccion(this)">
-                    <span class="checkmark"></span>
-                    habilitado
-                </label>
-                <label class="custom-checkbox">
-                    <input type="checkbox" name="estado" value="deshabilitado" onclick="limitarSeleccion(this)">
-                    <span class="checkmark"></span>
-                    deshabilitado
-                </label>
-                <br>
-                <input type="submit" value="Crear Media" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se creara el nuevo registro, ¿esta seguro?')">
 
-              </form>
-              
-        </div>
+        <div class="col-lg-12">
+          {!! Form::open(['route'=> 'admin.archivosmedia.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+          <!--//aun falta cambiar si el pedido lo hizo el cliente o camarero-->   
+          {!!Form::token()!!}
+              <div class="form-group">
+                  {!! Form::label('name', 'Nombre') !!}
+                  {!!Form :: text ('name', null,['class'=>'form-control','placeholder'=>'Ingrese el nombre del texto'])!!}
+                  @error('name')
+                  <small class="text-danger">{{$message}}</small>
+                  @enderror
+              </div>   
+              <div class="form-group">
+                  {!! Form::label('descripcion', 'Descripcion') !!}
+                  {!!Form :: textarea ('descripcion', null,['class'=>'form-control','placeholder'=>'Ingrese el contenido del texto'])!!}
+                  @error('descripcion')
+                  <small class="text-danger">{{$message}}</small>
+                  @enderror
+              </div> 
+              <div class="form-group">
+                {!! Form::label('categoria', 'Categoria') !!}
+                {!!Form :: select ('categoria', ['Mision' => 'Mision', 'Vision' => 'Vision','Quienes Somos' => 'Quienes Somos','Proyectos' => 'Proyectos'], 'null',['class'=>'form-control'])!!}
+                @error('categoria')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            
+              <div class="form-group">
+                  {!! Form::label('estado', 'Estado') !!}
+                  {!!Form :: select ('estado', ['habilitado' => 'habilitado', 'deshabilitado' => 'deshabilitado'], 'deshabilitado',['class'=>'form-control'])!!}
+                  @error('estado')
+                  <small class="text-danger">{{$message}}</small>
+                  @enderror
+              </div>
+  
+              {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
+  
+          {!! Form::close() !!}
+  
+  
+             
+                
+          </div>
+  </div>
     </div>
     
   
@@ -59,15 +66,5 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
-    <script>
-        // Función para limitar la selección a una sola opción
-        function limitarSeleccion(elem) {
-          var estado = document.getElementsByName("estado");
-          for (var i = 0; i < estado.length; i++) {
-            if (estado[i] !== elem) {
-              estado[i].checked = false;
-            }
-          }
-        }
-      </script>
+    
 @stop

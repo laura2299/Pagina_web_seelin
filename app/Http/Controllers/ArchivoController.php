@@ -46,7 +46,7 @@ class ArchivoController extends Controller
         $miarchivo->fecha_subida= Carbon::now();
         $miarchivo->categoria = $request->categoria;
         $miarchivo->fecha = $request->fecha;
-        $miarchivo->estado = "habilitado";
+        $miarchivo->estado = $request->estado;
         $miarchivo->save();
         return redirect('administrador/documentos');
     }
