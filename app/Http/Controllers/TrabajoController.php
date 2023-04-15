@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Trabajo;
 
 class TrabajoController extends Controller
 {
@@ -13,7 +14,8 @@ class TrabajoController extends Controller
      */
     public function index()
     {
-        //
+        $experiencias=Trabajo::all();
+        return view('dashboard/experiencias/index',compact('experiencias'));
     }
 
     /**
@@ -23,7 +25,7 @@ class TrabajoController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard/experiencias/create');
     }
 
     /**
@@ -34,7 +36,14 @@ class TrabajoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Trabajo = new Trabajo();
+        $Trabajo->actividad = $request->actividad;
+        $Trabajo->fecha_inicio = $request->fecha_inicio;
+        $Trabajo->categoria = $request->categoria;
+        $Trabajo->estado = $request->estado;
+        $Trabajo->id_cliente = $request->id_cliente;
+        $Trabajo->save();
+        return redirect()->route('admin.archivosmedia.index');
     }
 
     /**

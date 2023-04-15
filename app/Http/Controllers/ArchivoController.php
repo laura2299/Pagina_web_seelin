@@ -19,6 +19,12 @@ class ArchivoController extends Controller
         return view('dashboard/documentos/index',compact('Archivos'));
     }
 
+    public function mostrar()
+    {
+        $archivos=Archivo::all();
+        return view('/pagina_principal/documentos',compact('archivos') );
+    }
+
     /**
      * Show the form for creating a new resource.
      *

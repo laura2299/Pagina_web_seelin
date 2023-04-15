@@ -34,7 +34,8 @@
 </head>
 
 <body
-    style="background: rgb(255, 255, 255);
+    style="
+    background: rgb(255, 255, 255);
     background: linear-gradient(90deg, rgba(225, 253, 249, 0.858) 0%, rgb(206, 218, 241) 37%, rgba(219, 230, 239, 0.818) 100%);">
     <style>
        #barra_arriba{display: flex; flex-direction: row; background-color: #24315E;height: 45px;width: 100%;color:#fff; padding:10px;}
@@ -196,7 +197,37 @@
             background-color: #16979A;
             color: white;
         }
+        .whats{
+			width:105px;
+            margin:20px;
+			position:fixed;
+			bottom:0px;
+			right:0;
+            /*
+            background:white;
+            border:5px solid #16979A;
+            */
+            background: #25D366;
+            border:5px solid white;
+            border-radius:30px;
+            
 
+		}
+        .whats a ion-icon{
+            width:80px;
+            height:80px;
+            /*
+            color: #24315E;
+            */
+            color: white;
+        }
+        .whats:hover{
+            background:#16979A;
+            border:5px solid #24315E;
+        }
+        .whats:hover a ion-icon{
+            color:white;
+        }
     </style>
     <div id="app">
 
@@ -234,6 +265,7 @@
                   <a href="{{ route('servicios') }}" class="@if(Request::is('servicios')) active @endif">Servicios</a>
                   <a href="{{ route('clientes') }}" class="@if(Request::is('clientes')) active @endif">Clientes</a>
                   <a href="{{ route('proyectos') }}" class="@if(Request::is('proyectos')) active @endif">Proyectos</a>
+                  <a href="{{ route('capacitaciones') }}" class="@if(Request::is('capacitaciones')) active @endif">Capacitaciones</a>
                   <a href="javascript:void(0);" class="icon" onclick="miFun()">
                     <ion-icon name="reorder-four-outline"></ion-icon>
                   </a>
@@ -263,6 +295,10 @@
 
         <!---contenido--->
         @yield('content') @section('content')
+
+        <div class="whats">
+		    <a href="https://api.whatsapp.com/send/?phone=59172572458" target="_blank"><ion-icon name="logo-whatsapp"></ion-icon></a>
+		</div>
 
         <!---footer---> 
         <!--Footer 1-->
@@ -295,15 +331,21 @@
         <!--Footer 1-->
         <style>
             footer{
+                display:flex;
+                justify-content: space-around;
                 padding: 0px;
                 background: white;
+                width:100%;
+                
             }
             .lin_azul{
+                display:flex;
+                justify-content: space-around;
                 border-top:8px solid #24315E;
                 border-bottom:8px solid #24315E;
-                
                 padding-bottom:15px;
                 padding-top:15px;
+                width: 100%;
             }
             .logo_f{
                 display:flex;
@@ -334,7 +376,7 @@
             .contactanos_f a{
                 padding:10px;
                 font-size:large;
-               color:white;
+                color:white;
                 text-decoration:none;
                 border-radius:8px;
                 background: #16979A;
@@ -351,7 +393,7 @@
             }
         </style>
         <footer>
-            <div class="conteiner-fluid">
+            <div class="conteiner-q">
                 <div class="row lin_azul">
                   <div class="logo_f col-3">
                         <img src="img/logoselin2.png" alt="logo Seelin">

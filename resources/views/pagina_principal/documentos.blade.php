@@ -16,10 +16,44 @@
 			max-width: 400px;
 			width:100%;
 			align-self:center;
+			text-align:center;
+			padding: 5px;
+			text-decoration:none;
+			border: 3px solid #16979A;
+			border-radius: 8px;
 		}
 		#btn_busc:hover{
 			background:#16979A;
 			color:white;
+		}
+		#forms{
+			display:flex;
+			justify-content:center;
+			width:100%;
+			min-width: 350px;
+		}
+		#forms form{
+			align-self:center;
+			display:flex;
+			justify-content:center;
+			flex-direction:column;
+			min-width: 350px;
+			background: white;
+			padding:20px;
+			border-left:5px solid #16979A;
+			border-right:5px solid #16979A;
+			border-radius:8px;
+		}
+		#forms h3{
+			text-align:center;
+			text-decoration:underline;
+			margin-bottom:20px;
+		}
+		#forms label{
+			display:flex;
+			width:330px;
+			justify-content: space-around;
+			margin-bottom:15px;
 		}
 	</style>
 	<div class="container-fluid">
@@ -27,6 +61,7 @@
 		<br>
 			<div id="forms">
 				<form action="">
+					<h3>BUSCADOR</h3>
 					<label for="nombre">
 						<span>Nombre:</span>
 						<input type="text" name="nombre" id="nombre">
@@ -40,11 +75,13 @@
 						<input type="date" name="fecha" id="fecha">
 					</label>
 					<label for="buscar">
-						<input id="btn_busc" type="button" value="Buscar">
+						<a href="{{ route('documentos_res') }}" id="btn_busc">Buscar</a>
+						
 					</label>
 				</form>
 			</div>
 		<br>
+		@isset($archivos)
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
@@ -58,15 +95,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Estado de equipos revisados en zona principal de trabajo</td>
-					<td>Reporte</td>
-					<td><a href="#"><ion-icon name="open-outline"></ion-icon></a></td>
-					<td><a href="#"><ion-icon name="download-outline"></ion-icon></a></td>
-					<td>08/10/23</td>
-					<td>1563 Kb</td>
-				</tr>
+
+				@foreach ($archivos as $item)
+					<tr>
+						<th scope="row">1</th>
+						<td>{{$item->name}}</td>
+						<td>{{$item->categoria}}</td>
+						<td><a href="#"><ion-icon name="open-outline"></ion-icon></a></td>
+						<td><a href="#"><ion-icon name="download-outline"></ion-icon></a></td>
+						<td>{{$item->fecha}}</td>
+						<td>{{$item->path}}</td>
+					</tr>
+				@endforeach 
+				<!--
+				
 				<tr>
 					<th scope="row">2</th>
 					<td>Estado de equipos revisados en zona principal de trabajo</td>
@@ -85,8 +127,9 @@
 					<td>08/10/23</td>
 					<td>1563 Kb</td>
 				</tr>
+	-->
 			</tbody>
 		</table>
-		
+		@endisset
 	</div>
 @endsection

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use Illuminate\Http\Request;
+use App\Models\Trabajo;
+use App\Models\Media;
 
 class ClienteController extends Controller
 {
@@ -14,6 +17,16 @@ class ClienteController extends Controller
     public function index()
     {
         //
+    }
+
+    
+
+    public function mostrar()
+    {
+        $clientes = Cliente::all();
+        $trabajos = Trabajo::all();
+        $medias=Media::where('categoria','clientes')->get();
+        return view('pagina_principal/clientes',compact('clientes','trabajos','medias'));
     }
 
     /**

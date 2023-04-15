@@ -19,6 +19,24 @@ class MediaController extends Controller
         return view('dashboard/media/index',compact('medias') );
     }
 
+    public function mostrar_qs()
+    {
+        $medias=Media::where('categoria','quienes_somos')->get();
+        return view('/pagina_principal/quienes_somos',compact('medias') );
+    }
+
+
+    public function mostrar_servicios()
+    {
+        $medias=Media::where('categoria','servicios')->get();
+        return view('/pagina_principal/servicios',compact('medias') );
+    }
+
+    public function mostrar_proyectos()
+    {
+        $medias=Media::where('categoria','proyectos')->get();
+        return view('/pagina_principal/proyectos',compact('medias') );
+    }
     /**
      * Show the form for creating a new resource.
      *

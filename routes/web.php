@@ -6,7 +6,8 @@ use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\CapacitacionController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\TrabajoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +30,7 @@ Route::get('/dash', function () {
 });
 
 
-Route::get('/quienes_somos', function () {
-    return view('pagina_principal/quienes_somos');
-})->name('quienes_somos');
+
 Route::get('/servicios', function () {
     return view('pagina_principal/servicios');
 })->name('servicios');
@@ -53,9 +52,48 @@ Route::get('/cambio_contraseña', function () {
 Route::get('/documentos', function () {
     return view('pagina_principal/documentos');
 })->name('documentos');
+
+
+
+
+/*
+Route::get('/capacitaciones' , function () {
+    return view('pagina_principal/capacitaciones');
+})->name('capacitaciones');
+Route::get('/capacitaciones', [CapacitacionController::class, 'mostrar']);
+Route::controller(CapacitacionController::class, 'mostrar')->group(function () {
+    
+});
+Route::get('/quienes_somos', function () {
+    return view('pagina_principal/quienes_somos');
+})->name('quienes_somos');
+
+
+*/
+
+Route::controller(MediaController::class)->group(function () {
+    Route::get('/quienes_somos' , 'mostrar_qs' )->name('quienes_somos');
+    Route::get('/servicios' , 'mostrar_servicios' )->name('servicios');
+    Route::get('/proyectos' , 'mostrar_proyectos' )->name('proyectos');
+});
+
+Route::controller(CapacitacionController::class)->group(function () {
+    Route::get('/capacitaciones' , 'mostrar' )->name('capacitaciones');
+});
+
+Route::controller(ClienteController::class)->group(function () {
+    Route::get('/clientes' , 'mostrar' )->name('clientes');
+});
+
+Route::controller(ArchivoController::class)->group(function () {
+    Route::get('/documentos_res' , 'mostrar' )->name('documentos_res');
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 // ruta para ver lo relacionado con media
 Route::resource('administrador/media', MediaController::class)->names('admin.archivosmedia');
 
@@ -70,3 +108,6 @@ Route::resource('administrador/media/imagenes', ImagenController::class)->names(
 
 // ruta para ver lo relacionado con users
 Route::resource('administrador/users', UserController::class)->names('admin.users');
+
+// ruta para ver lo relacionado con las experiencias
+Route::resource('administrador/experiencias', TrabajoController::class)->names('admin.experiencias');
