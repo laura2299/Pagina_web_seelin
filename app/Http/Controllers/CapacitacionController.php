@@ -36,6 +36,14 @@ class CapacitacionController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+        [
+            'expositor'=>'required',
+            'titulo'=> 'required',
+            'fecha'=>'required',
+            'estado'=> 'required'
+        ]
+        );
         $capacitacion = new Capacitacion();
         $capacitacion->expositor = $request->expositor;
         $capacitacion->titulo = $request->titulo;

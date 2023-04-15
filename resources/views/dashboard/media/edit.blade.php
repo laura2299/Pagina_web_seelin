@@ -3,53 +3,49 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Editar</h1>
+    <h1>Editar Archivos Media</h1>
 @stop
 
 @section('content')
-    <h2>Complete los siguientes campos</h2>
+    <h2>Editar los siguientes campos</h2>
     <div class="row">
         <div class="col-lg-12">
-            <form action="{{route('admin.archivosmedia.update',$media->id)}}" method="post" enctype="multipart/form-data">
-                @csrf
-               
-        {{method_field('PATCH')}}
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="name" value="{{$media->name}}">
-                <br>
-                <label for="descripcion">Antigua Descripción:</label>
-                <div class="card">
-                    <p>{{$media->descripcion}}</p>
-                </div>
-                <label for="descripcion">Nueva Descripción:</label>
-                <textarea id="descripcion" name="descripcion" value="{{$media->descripcion}}"></textarea>
-                <br>
-                <label for="categoria">Categoría:</label>
-                <select id="categoria" name="categoria">
-                  <option value="mision">Misión</option>
-                  <option value="vision">Visión</option>
-                  <option value="quienes_somos">Quiénes Somos</option>
-                  <option value="proyectos">Proyectos</option>
-                </select>
-                <br>
-                
-                <br>
-                <label for="estado">Estado:</label><br>
+          {!! Form::model($media,['route'=>['admin.documentos.update',$media],'method'=>'put']) !!}
+
+          
+              <div class="form-group">
+                  {!! Form::label('name', 'Nombre') !!}
+                  {!!Form :: text ('name', null,['class'=>'form-control','placeholder'=>'Ingrese el nombre del texto'])!!}
+                  @error('name')
+                  <small class="text-danger">{{$message}}</small>
+                  @enderror
+              </div>   
+              <div class="form-group">
+                  {!! Form::label('descripcion', 'Descripcion') !!}
+                  {!!Form :: textarea ('descripcion', null,['class'=>'form-control','placeholder'=>'Ingrese el contenido del texto'])!!}
+                  @error('descripcion')
+                  <small class="text-danger">{{$message}}</small>
+                  @enderror
+              </div> 
+              <div class="form-group">
+                {!! Form::label('categoria', 'Categoria') !!}
+                {!!Form :: select ('categoria', ['Mision' => 'Mision', 'Vision' => 'Vision','Quienes Somos' => 'Quienes Somos','Proyectos' => 'Proyectos'], 'null',['class'=>'form-control'])!!}
+                @error('categoria')
+                <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            
+              <div class="form-group">
+                  {!! Form::label('estado', 'Estado') !!}
+                  {!!Form :: select ('estado', ['habilitado' => 'habilitado', 'deshabilitado' => 'deshabilitado'], 'deshabilitado',['class'=>'form-control'])!!}
+                  @error('estado')
+                  <small class="text-danger">{{$message}}</small>
+                  @enderror
+              </div>
   
-                <label class="custom-checkbox">
-                <input type="checkbox" name="estado" value="habilitado" onclick="limitarSeleccion(this)">
-                    <span class="checkmark"></span>
-                    habilitado
-                </label>
-                <label class="custom-checkbox">
-                    <input type="checkbox" name="estado" value="deshabilitado" onclick="limitarSeleccion(this)">
-                    <span class="checkmark"></span>
-                    deshabilitado
-                </label>
-                <br>
-                
-                <input type="submit" value="validar datos" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se editaran los campos, ¿esta seguro?')">
-              </form>
+              {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
+  
+          {!! Form::close() !!}
              
               <br>
               <div class="col-md-6" >
