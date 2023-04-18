@@ -37,6 +37,15 @@ class ArchivoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'archivo'=>'required|mimes:pdf,xlsx',
+            'categoria'=>'required',
+            'fecha'=> 'required',
+            'estado'=>'required'
+        ], [
+            'archivo.required' => 'Por favor, selecciona un archivo de pdf o excel.',
+            'archivo.mimes' => 'El archivo debe ser de tipo PDF o XLSX.'
+        ]);
         
         $miarchivo = new Archivo();
         $miarchivo->name = $request->file('archivo')->getClientOriginalName();
@@ -84,6 +93,8 @@ class ArchivoController extends Controller
     public function update(Request $request, $id)
     {
         $archivo=Archivo::findOrFail($id);
+
+        
         $archivo->estado=$request->estado;
         $archivo->fecha = $request->fecha;
         $archivo->save();

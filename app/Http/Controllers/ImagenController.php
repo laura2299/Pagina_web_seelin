@@ -48,6 +48,14 @@ class ImagenController extends Controller
 
         $imagen = new Imagen();
         
+        $request->validate([
+            'archivo'=>'required|mimes:png,jpg',
+            'estado'=>'required'
+            
+        ], [
+            'archivo.required' => 'Por favor, selecciona un archivo de imagen.',
+            'archivo.mimes' => 'El archivo debe ser de tipo PNG o JPG.'
+        ]);
         $imagen->name =$request->file('archivo')->getClientOriginalName();
         $array = explode('public',optional($request->file('archivo'))->store('public/files'));
         $imagen->archivo ='storage'.$array[1];
