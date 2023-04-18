@@ -42,7 +42,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function archivos(){
-    
         return $this ->belongsToMany('App\Models\Archivo','usuario_archivo', 'id_archivo', 'id_ausuario')->withPivot('fechad'); 
-        }
+    }
 }

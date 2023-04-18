@@ -3,7 +3,9 @@
     <div class="container-q">
         <h1 style="text-align: left p-4">NUESTROS CLIENTES</h1>
         <div class="container_x">
-            <p >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis ipsa voluptatum dolorem laborum illum et maxime placeat voluptatem. Velit deserunt consequuntur sequi explicabo delectus officia perspiciatis quod hic qui ipsa.</p>
+            @foreach ($medias as $item)
+                <p>{{$item->descripcion}}</p>
+            @endforeach
         </div>
         <!--
         <div class="container-s">
@@ -85,7 +87,8 @@
             .boton-m img{
                 height: 100px;
                 width: auto;
-                max-width:250px;
+                align-self:center;
+                max-width: 200px;
             }
             .boton-m h4{
                 margin: 10px 0px 10px 0px;
@@ -158,15 +161,22 @@
         <input type="checkbox" name="btn-m" id="btn-m">
         <div class="container-fluid">
         <div class="row">
-            <div class="col-3 cliente_box">
-                <div class="boton-m">
-                    <img src="img/DELAPAZ.png" alt="Imagen" > 
-                    <h4>DelaPaz</h4>
-                    <label for="btn-m" id="DELAPAZ" class="boton_e" onclick="lista_Exp(this.id)">
-                        Ver Trabajos
-                    </label>
-                </div>                      
-            </div>
+            @foreach ($clientes as $item)
+                
+                @if ($item->estado == 'Habilitado' )
+                    <div class="col-3 cliente_box">
+                        <div class="boton-m">
+                            <img src="img/logo_cliente/{{$item->logo}}" onerror="this.onerror=null;this.src='img/logo_cliente/logoSeelin.png';" alt="Imagen" id="img_{{$item->nombre}}" > 
+                            <h4>{{$item->nombre}}</h4>
+                            <label for="btn-m" id="{{$item->nombre}}" class="boton_e" onclick="lista_Exp(this.id,{{$item->id}})">
+                                Ver Trabajos
+                            </label>
+                        </div>                      
+                    </div>
+                @endif 
+            @endforeach 
+                
+            <!--
             <div class="col-3 cliente_box">
                 <div class="boton-m">
                     <img src="img/elfec.jpg" alt="Imagen" >  
@@ -186,8 +196,7 @@
                     </label>
                 </div> 
                                       
-            </div>      
-            <!--
+            </div>  
             <div class="col-3 cliente_box ">
                     <img src="img/cobee.png" alt="Imagen">                   
             </div>
@@ -245,13 +254,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>1</th>
-                    <th>COPERCONS</th>
-                    <th>EXTENSIÓN DE RED EN MEDIA TENSION CON TRANSFORMADOR DE 15 KVA PARA BOMBA DE AGUA EN LA COMUNIDAD TANANA</th>
-                    <th>2022-11</th>
-                    <th>CONSULTORIA</th>
-                </tr>
+            @foreach ($trabajos as $item2)
+                @if ($item2->estado == 'Habilitado')
+                    <tr>
+                        <th>1</th>
+                        <th>{{$item2->id_cliente}}</th>
+                        <th>{{$item2->actividad}}</th>
+                        <th>{{$item2->fecha_inicio}}</th>
+                        <th>{{$item2->categoria}}</th>
+                    </tr>
+                @endif
+
+            @endforeach 
+                <!--
                 <tr>
                     <th>2</th>
                     <th>DELAPAZ</th>
@@ -280,6 +295,7 @@
                     <th>2022-11</th>
                     <th>CONSULTORIA</th>
                 </tr>
+        -->
             </tbody>
         </table>
     </div>
@@ -310,7 +326,7 @@
         <label for="btn-m" class="cerrar-modal"></label>
     </div>
     <script>
-        function lista_Exp(nombre) {
+        function lista_Exp(nombre, id,logo) {
             var tabi=document.getElementById("tabla_r");
             var rowCount = tabi.rows.length;
             for (let j = 0; j < rowCount; j++) {
@@ -321,8 +337,9 @@
             
             var md=document.getElementById("mod_img");
 
+            var si=document.getElementById("img_"+nombre);
             
-            md.src ="img/"+nombre+".png";
+            md.src = si.src;
             md.alt ="Logo "+nombre;
             var mh=document.getElementById("mod_h4");
             mh.innerText=nombre;
@@ -330,8 +347,8 @@
             
             for (let i = 1; i < x.rows.length; i++) {
                 y=x.rows[i].cells;
-                if (y[1].innerHTML==nombre) {
-                    tabi.insertRow(-1).innerHTML='<td>'+y[2].innerHTML+'</td><td>'+y[3].innerHTML+'</td><td>'+y[4].innerHTML+'</td>';
+                if (y[1].innerHTML==id) {
+                    tabi.insertRow(-1).innerHTML='<td>'+y[2].innerHTML+'</td><td>'+y[3].innerHTML.slice(0,10)+'</td><td>'+y[4].innerHTML+'</td>';
                 }
             }
         }

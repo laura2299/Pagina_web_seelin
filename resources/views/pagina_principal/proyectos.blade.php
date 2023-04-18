@@ -40,43 +40,50 @@
     <div class="container-fluid">
         <h1 style="text-align: left p-4">PROYECTOS</h1>
 
-                <div class="row">
-                        <div class="c_proyecto col-3 ">
-                                <div class="cp_imagen">
-                                        <img src="" alt="Imagen Proyecto">
-                                </div>
-                                <div class="cp_texto">
-                                        <h4>Analisis y diseño de Apantallamiento en Subestaciones Valle de Zongo</h4>
-                                </div>
+            <div class="row">
+                @foreach ($medias as $item)
+                    <div class="c_proyecto col-3 ">
+                        <div class="cp_imagen">
+                            <img src="" alt="Imagen Proyecto">
                         </div>
+                        <div class="cp_texto">
+                            <h4>{{$item->name}}</h4>
+                        </div>
+                    </div>
+                @endforeach 
+                
+            <!--
+                    
 
-                        <div class="c_proyecto col-3 ">
-                                <div class="cp_imagen">
-                                        <img src="" alt="Imagen Proyecto">
-                                </div>
-                                <div class="cp_texto">
-                                        <h4>Analisis y diseño de Apantallamiento en Subestaciones Valle de Zongo</h4>
-                                </div>
-                        </div>
+                    <div class="c_proyecto col-3 ">
+                            <div class="cp_imagen">
+                                    <img src="" alt="Imagen Proyecto">
+                            </div>
+                            <div class="cp_texto">
+                                    <h4>Analisis y diseño de Apantallamiento en Subestaciones Valle de Zongo</h4>
+                            </div>
+                    </div>
 
-                        <div class="c_proyecto col-3 ">
-                                <div class="cp_imagen">
-                                        <img src="" alt="Imagen Proyecto">
-                                </div>
-                                <div class="cp_texto">
-                                        <h4>Analisis y diseño de Apantallamiento en Subestaciones Valle de Zongo</h4>
-                                </div>
-                        </div>
+                    <div class="c_proyecto col-3 ">
+                            <div class="cp_imagen">
+                                    <img src="" alt="Imagen Proyecto">
+                            </div>
+                            <div class="cp_texto">
+                                    <h4>Analisis y diseño de Apantallamiento en Subestaciones Valle de Zongo</h4>
+                            </div>
+                    </div>
 
-                        <div class="c_proyecto col-3 ">
-                                <div class="cp_imagen">
-                                        <img src="" alt="Imagen Proyecto">
-                                </div>
-                                <div class="cp_texto">
-                                        <h4>Analisis y diseño de Apantallamiento en Subestaciones Valle de Zongo</h4>
-                                </div>
-                        </div>
-                </div>
+                    <div class="c_proyecto col-3 ">
+                            <div class="cp_imagen">
+                                    <img src="" alt="Imagen Proyecto">
+                            </div>
+                            <div class="cp_texto">
+                                    <h4>Analisis y diseño de Apantallamiento en Subestaciones Valle de Zongo</h4>
+                            </div>
+                    </div>
+            -->
+            </div>
+        
                   
         </div>
 

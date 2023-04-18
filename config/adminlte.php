@@ -321,7 +321,7 @@ return [
                 ],
                 [
                     'text'    => 'experiencias',
-                    'url'     => '#',
+                    'route'     => 'admin.experiencias.index',
                     
                 ],
                 [

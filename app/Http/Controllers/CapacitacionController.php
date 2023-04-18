@@ -53,6 +53,11 @@ class CapacitacionController extends Controller
         return redirect()->route('admin.capacitaciones.index');
     }
 
+    public function mostrar()
+    {
+        $capacitaciones = Capacitacion::all();
+        return view('/pagina_principal/capacitaciones',compact('capacitaciones'));
+    }
     /**
      * Display the specified resource.
      *
@@ -73,7 +78,7 @@ class CapacitacionController extends Controller
     public function edit($id)
     {
         $Capacitacion=Capacitacion::findOrFail($id);
-        return view('dashboard/capacitaciones/edit',compact('Capacitacion'));
+        return compact('Capacitacion');
     }
 
     /**
