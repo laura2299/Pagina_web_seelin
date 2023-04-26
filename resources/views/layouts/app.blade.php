@@ -232,11 +232,12 @@
                 <div class="icono" id="mnc">
                     
                     <?php $id = session_id();echo $id;?>
-                    @can('documentos')
+                    
                     <a href="{{ route('logout_u') }}">Cerrar Sesion</a>
+                    
                     <a href="{{ route('cambio_contraseña') }}">Configuración</a>
                     <a href="{{ route('documentos') }}">Documentos</a>
-                    @endcan
+                    
                     <a href="{{ route('login') }}">Inicio Sesion</a>
                 </div>  
                 <a href="javascript:void(0);" class="iconito" onclick="miFun2()"><ion-icon name="person-circle-outline"></ion-icon></a>
