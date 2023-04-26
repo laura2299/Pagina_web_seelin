@@ -316,8 +316,17 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'proyectos y mas',
+                    'text' => 'Quienes Somos',
                     'route'  => 'admin.archivosmedia.index',
+                ],
+                [
+                    'text' => 'imagenes',
+                    'route'  => 'admin.imagenes.index',
+                ],
+                [
+                    'text'    => 'clientes',
+                    'route'     => 'admin.clientes.index',
+                    
                 ],
                 [
                     'text'    => 'experiencias',
@@ -343,22 +352,7 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        
     ],
 
     /*

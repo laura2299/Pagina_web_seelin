@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Imagen;
 use App\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ImagenController extends Controller
 {
@@ -57,8 +60,16 @@ class ImagenController extends Controller
             'archivo.mimes' => 'El archivo debe ser de tipo PNG o JPG.'
         ]);
         $imagen->name =$request->file('archivo')->getClientOriginalName();
-        $array = explode('public',optional($request->file('archivo'))->store('public/files'));
-        $imagen->archivo ='storage'.$array[1];
+       
+            $path1 = $request->file('archivo')->storeAs(
+                'public/files/img', $request->file('archivo')->getClientOriginalName()
+            );
+
+        $array = explode('public',$path1);
+        
+        $imagen->archivo = 'storage'.$array[1];
+        
+       
         
         $imagen->estado= $request->estado;
         $imagen->id_media= $request->id_media;
@@ -86,7 +97,10 @@ class ImagenController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $imagen=Imagen::findOrFail($id);
+        $media =Media::all()->pluck('name','id');
+        return view('dashboard/imagenes/edit',compact('imagen','media'));
     }
 
     /**
@@ -97,8 +111,42 @@ class ImagenController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        
+        $request->validate([
+            'archivo'=>'sometimes|mimes:png,jpg',
+            'estado'=>'required'
+            
+        ], [
+            
+            'archivo.mimes' => 'El archivo debe ser de tipo PNG o JPG.'
+        ]);
+        $img=$request->file('archivo');
+        if (!isEmpty($img)) {
+            $imagen=Imagen::findOrFail($id);
+            $imagen->name =$request->file('archivo')->getClientOriginalName();
+
+         $path1 = $request->file('archivo')->storeAs(
+                'public/files/img', $request->file('archivo')->getClientOriginalName()
+            );
+
+        $array = explode('public',$path1);
+        
+        $imagen->archivo = 'storage'.$array[1];
+        
+        $imagen->estado= $request->estado;
+        $imagen->id_media= $request->id_media;
+        $imagen->save();
+        }
+        else {
+        $imagen2=Imagen::findOrFail($id);
+        $imagen2->estado= $request->estado;
+        $imagen2->id_media= $request->id_media;
+        $imagen2->save();
+        }
+        
+        $imagenes= Imagen::all();
+        return view('dashboard/imagenes/index',compact('imagenes'));
     }
 
     /**
@@ -109,6 +157,9 @@ class ImagenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Imagen::destroy($id);
+        
+        return redirect()->route('admin.imagenes.index')->with('mensaje', 'El registro ha sido eliminado correctamente');
+
     }
 }

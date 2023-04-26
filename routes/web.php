@@ -25,9 +25,9 @@ Route::get('/', function () {
 Route::get('/w', function () {
     return view('welcome');
 });
-Route::get('/dash', function () {
+Route::get('/dashboard', function () {
     return view('dashboard/index');
-});
+})->name('admin.home');
 
 
 
@@ -104,10 +104,14 @@ Route::resource('administrador/documentos', ArchivoController::class)->names('ad
 Route::resource('administrador/capacitaciones', CapacitacionController::class)->names('admin.capacitaciones');
 
 // ruta para ver lo relacionado con iimagenes
-Route::resource('administrador/media/imagenes', ImagenController::class)->names('admin.imagenes');
+Route::resource('administrador/imagenes', ImagenController::class)->names('admin.imagenes');
 
 // ruta para ver lo relacionado con users
 Route::resource('administrador/users', UserController::class)->names('admin.users');
 
 // ruta para ver lo relacionado con las experiencias
 Route::resource('administrador/experiencias', TrabajoController::class)->names('admin.experiencias');
+ 
+// ruta para ver lo relacionado con los clientee
+Route::resource('administrador/clientes', ClienteController::class)->names('admin.clientes');
+ 

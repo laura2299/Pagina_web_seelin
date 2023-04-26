@@ -1,14 +1,7 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Editar Documento</h1>
-@stop
-
+@extends('layouts.plantillaBase')
 @section('content')
-    
-{!! Form::model($archivo,['route'=>['admin.documentos.update',$archivo],'method'=>'put']) !!}
+    <h3>Editar documento</h3>
+{!! Form::model($archivo,['route'=>['admin.documentos.update',$archivo],'method'=>'put','enctype' => 'multipart/form-data']) !!}
     
            
                 <div class="form-group">
@@ -18,6 +11,8 @@
                 <small class="text-danger">{{$message}}</small>
                 @enderror
             </div>
+            <p>(No es necesario que vuelva a subir un archivo si no lo requiere)</p>
+
             <div class="form-group">
                 {!! Form::label('categoria', 'Categoria') !!}
                 {!!Form :: select ('categoria', ['correspondencia' => 'correspondencia', 'archivo' => 'archivo'], 'correspondencia',['class'=>'form-control'])!!}
@@ -50,21 +45,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script type="text/javascript">
-        
-
-    <script>
-    $('.datepicker').datepicker({
-        format: "yyyy/mm/dd",
-        language: "es",
-        autoclose: true
-    });
-</script>
-@stop

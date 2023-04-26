@@ -1,13 +1,12 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Experiencias</h1>
-    
-@stop
+@extends('layouts.plantillaBase')
 
 @section('content')
+@if(session('mensaje'))
+<div class="alert alert-success">
+    {{ session('mensaje') }}
+</div>
+@endif
+    <h2>Experiencias</h2>
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary" href="{{route('admin.experiencias.create')}}">Nuevo</a>
@@ -33,7 +32,7 @@
                             <td>{{$item->actividad}}</td>
                             <td>{{$item->fecha_inicio}}</td>
                             <td>{{$item->categoria}}</td>
-                            <td>{{$item->id_cliente}}</td>
+                            <td>{{$item->cliente->nombre}}</td>
                             <td>{{$item->estado}}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="{{route('admin.experiencias.edit',$item->id)}}">Editar</a>
@@ -61,10 +60,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

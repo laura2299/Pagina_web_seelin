@@ -1,18 +1,16 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Lista de Media proyectos y mas</h1>
-@stop
+@extends('layouts.plantillaBase')
 
 @section('content')
+@if(session('mensaje'))
+<div class="alert alert-success">
+    {{ session('mensaje') }}
+</div>
+@endif
+    <h3>Lista de Media</h3>
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary" href="{{route('admin.archivosmedia.create')}}">Nuevo</a>
-            <a href="{{route('admin.imagenes.create')}}"  class="btn btn-secondary"  role="button" style="width: 150px">agregar imagenes</a>
-            <a class="btn btn-primary" href="{{route('admin.imagenes.index')}}" class="btn btn-primary">Imagenes</a>
-
+            
         </div>
         <div class="col-md-6" >
           </div>
@@ -60,10 +58,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

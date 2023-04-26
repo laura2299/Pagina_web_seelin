@@ -1,12 +1,7 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Añadir imagen </h1>
-@stop
+@extends('layouts.plantillaBase')
 
 @section('content')
+<h3>Añadir imagen</h3>
     <div class="row">
         <div class="col-lg-12">
         {!! Form::open(['route'=> 'admin.imagenes.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
@@ -48,12 +43,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-     <!-- Enlace para el calendario -->
-
-@stop

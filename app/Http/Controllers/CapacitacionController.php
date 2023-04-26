@@ -89,7 +89,14 @@ class CapacitacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {    $request->validate(
+        [
+            'expositor'=>'required',
+            'titulo'=> 'required',
+            'fecha'=>'required',
+            'estado'=> 'required'
+        ]
+        );
         $Capacitacion=Capacitacion::findOrFail($id);
         $Capacitacion->expositor = $request->expositor;
         $Capacitacion->titulo = $request->titulo;
@@ -109,6 +116,6 @@ class CapacitacionController extends Controller
     {
         Capacitacion::destroy($id);
         
-        return redirect()->route('admin.capacitaciones.index');
+        return redirect()->route('admin.capacitaciones.index')->with('mensaje', 'El registro ha sido eliminado correctamente');
     }
 }

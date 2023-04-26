@@ -1,12 +1,11 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Lista de Imagenes</h1>
-@stop
-
+@extends('layouts.plantillaBase')
 @section('content')
+@if(session('mensaje'))
+<div class="alert alert-success">
+    {{ session('mensaje') }}
+</div>
+@endif
+    <h2>Lista de imagenes</h2>
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary" href="{{route('admin.imagenes.create')}}">Nueva imagen</a>
@@ -32,14 +31,14 @@
                             <td>{{$item->name}}</td>
                             <td>{{$item->estado}}</td>
                             <td>{{$item->media->name}}</td>
-                            <th colspan="3" class="text-center" >
-                                <img src="{{$item->archivo}}" alt="" width="300" height="200">
-                            </th>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{route('admin.archivosmedia.edit',$item->id)}}">Editar</a>
+                                <a href="/{{$item->archivo}}">Ver</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.imagenes.edit',$item->id)}}">Editar</a>
                             </td>
                             <td> 
-                                <form action="{{route('admin.archivosmedia.destroy',$item->id)}}" method="post">
+                                <form action="{{route('admin.imagenes.destroy',$item->id)}}" method="post">
                                  @csrf
                                  <!--  covertimos el metod_field en delete ya que es lo que espera la funcion store del controlador -->
                                 {{method_field('DELETE')}}
@@ -58,10 +57,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

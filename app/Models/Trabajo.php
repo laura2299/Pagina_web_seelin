@@ -9,6 +9,13 @@ class Trabajo extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $fillable = [
+        'actividad',
+        'fecha_inicio',
+        'categoria',
+        'estado',
+        'id_cliente'
+    ];
     //relacion uno a muchos inversa con cliente
     public function cliente()
     {
