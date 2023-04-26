@@ -24,7 +24,7 @@
               </div> 
               <div class="form-group">
                 {!! Form::label('categoria', 'Categoria') !!}
-                {!!Form :: select ('categoria', ['servicios' => 'servicios','quienes_somos' => 'quienes_somos','proyectos' => 'proyectos'], 'null',['class'=>'form-control'])!!}
+                {!!Form :: select ('categoria', ['inicio' => 'inicio','servicios' => 'servicios','quienes_somos' => 'quienes_somos','clientes' => 'clientes','proyectos' => 'proyectos'], 'null',['class'=>'form-control'])!!}
                 @error('categoria')
                 <small class="text-danger">{{$message}}</small>
                 @enderror

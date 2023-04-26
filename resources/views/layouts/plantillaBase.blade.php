@@ -47,7 +47,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <small class="bg-red">Online</small>
-                  <span class="hidden-xs">Juan Carlos Arcila Díaz</span>
+                  <span class="hidden-xs">SEELIN</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -97,7 +97,7 @@
               <ul class="treeview-menu">
                 <li><a href="{{route('admin.archivosmedia.index')}}"><i class="fa fa-circle-o"></i> Quienes somos</a></li>
                 <li><a href="{{route('admin.imagenes.index')}}"><i class="fa fa-circle-o"></i> Imagenes</a></li>
-                <li><a href={{route('admin.clientes.index')}}><i class="fa fa-circle-o"></i> Clientes</a></li>
+                <li><a href="{{route('admin.clientes.index')}}"><i class="fa fa-circle-o"></i> Clientes</a></li>
                 <li><a href="{{route('admin.experiencias.index')}}"><i class="fa fa-circle-o"></i> Experiencias</a></li>
 
                 <li><a href="{{route('admin.capacitaciones.index')}}"><i class="fa fa-circle-o"></i> Capacitaciones</a></li>
