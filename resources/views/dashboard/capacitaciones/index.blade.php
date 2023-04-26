@@ -18,6 +18,7 @@
                         <th>ID</th>
                         <th>Expositor</th>
                         <th>Titulo</th>
+                        <th>Documento</th>
                         <th>Fecha</th>
                         <th>Estado</th>
                         <th colspan="2"></th>
@@ -30,6 +31,9 @@
                             <td>{{$item->id}}</td>
                             <td>{{$item->expositor}}</td>
                             <td>{{$item->titulo}}</td>
+                            <td>
+                                <a href="/{{$item->archivo}}">Ver</a>
+                            </td>
                             <td>{{$item->fecha}}</td>
                             <td>{{$item->estado}}</td>
                             <td>

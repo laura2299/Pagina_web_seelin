@@ -26,9 +26,16 @@
                     @enderror
                 </div> 
                 
-               
                 <div class="form-group">
-                    {!! Form::label('fecha', 'Fecha') !!}
+                    {!! Form::label('archivo', 'archivo') !!}
+                    {!! Form::file('archivo',null, array('required' => 'true'),['class'=>'form-control'])!!}
+                    @error('archivo')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div> 
+    
+                <div class="form-group">
+                    {!! Form::label('fecha', 'Fecha de realizacion') !!}
                     {!! Form::date('fecha', \Carbon\Carbon::now()->format('Y-m-d')) !!}
                     @error('fecha')
                     <small class="text-danger">{{$message}}</small>

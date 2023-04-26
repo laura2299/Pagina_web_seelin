@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard/users/create');
     }
 
     /**
@@ -35,8 +35,42 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $request->validate([
+            'nombre'=>'required',
+            'lastname'=>'required',
+            'password'=> 'required|min:8',
+            'tipo'=>'required'
+        ],
+    );
+        $usuario=$request->only('nombre','lastname','usuario','password','tipo');
+        $usuario['password']=Hash::make($request['password']);
+        $user= new User();
+        $user->name = $usuario['nombre'];
+        $user->lastName = $usuario['lastname'];
+
+        $nom = substr($request->nombre, 0, 1);
+        $ap =$request->lastname;
+        $ap =str_replace(' ', '', $ap);
+        $concatenated = $nom.$ap;
+
+
+        $user->usuario = $concatenated;
+        $user->password = $usuario['password'];
+        $user->role = $usuario['tipo'];
+        $user->save();
+
+        if ($request->tipo == 'user_interno') {
+            $user->assignRole('user_interno');
+        }
+        if ($request->tipo == 'user_externo') {
+            $user->assignRole('user_externo');
+        }
+        $user2=User::findOrFail($user->id);
+        $user2->usuario= $concatenated.$user->id;
+        $user2->save();
+        return redirect()->route('admin.users.index')->with('mensaje', 'Se ha creado un nuevo usuario');
+
     }
 
     /**
@@ -81,6 +115,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        
+        return redirect()->route('admin.users.index')->with('mensaje', 'El usuario ha sido eliminado correctamente');
+
     }
 }

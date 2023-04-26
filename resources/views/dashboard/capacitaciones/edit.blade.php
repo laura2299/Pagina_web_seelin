@@ -3,7 +3,7 @@
 
 @section('content')
     <h2>Capacitacion</h2>
-    <h2>Editar los siguientes campos</h2>
+    <h3>Editar los siguientes campos</h3>
     <div class="row">
         <div class="col-lg-12">
             {!! Form::model($Capacitacion,['route'=>['admin.capacitaciones.update',$Capacitacion],'method'=>'put']) !!}
@@ -24,9 +24,16 @@
                     @enderror
                 </div> 
                 
-               
                 <div class="form-group">
-                    {!! Form::label('fecha', 'Fecha') !!}
+                    {!! Form::label('archivo', 'Archivo') !!}
+                    {!! Form::file('archivo',null, array('required' => 'true'),['class'=>'form-control'])!!}
+                    @error('archivo')
+                    <small class="text-danger">{{$message}}</small>
+                    @enderror
+                    <p>(si no requieres editar el archivo, puedes dejar el espacio en blanco)</p>
+                </div> 
+                <div class="form-group">
+                    {!! Form::label('fecha', 'Fecha de Realizacion') !!}
                     {!! Form::date('fecha', \Carbon\Carbon::now()->format('Y-m-d')) !!}
                     @error('fecha')
                     <small class="text-danger">{{$message}}</small>

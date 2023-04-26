@@ -16,17 +16,21 @@ class UserSeeder extends Seeder
     {
         User::create(
             [
-                'name'=>'Samuel Flores',
+                'name'=>'Samuel',
+                'lastName'=>'Flores',
                 'usuario'=>'Sam',
-                'password'=>bcrypt('12345678')
+                'password'=>bcrypt('12345678'),
+                'role'=>'administrador'
             ]
         )->assignRole('administrador');
 
         User::create(
             [
-                'name'=>'Leidy Patzi',
+                'name'=>'Leidy',
+                'lastName'=>'Patzi',
                 'usuario'=>'Lei',
-                'password'=>bcrypt('12345678')
+                'password'=>bcrypt('12345678'),
+                'role'=>'user_interno'
             ]
         )->assignRole('user_interno');
 

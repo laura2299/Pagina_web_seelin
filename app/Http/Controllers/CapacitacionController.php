@@ -42,7 +42,11 @@ class CapacitacionController extends Controller
             'expositor'=>'required',
             'titulo'=> 'required',
             'fecha'=>'required',
-            'estado'=> 'required'
+            'estado'=> 'required',
+            'archivo'=>'required|mimes:pdf',
+        ], [
+            'archivo.required' => 'Por favor, selecciona un archivo pdf.',
+            'archivo.mimes' => 'El archivo debe ser de tipo PDF'
         ]
         );
         $capacitacion = new Capacitacion();
@@ -50,6 +54,14 @@ class CapacitacionController extends Controller
         $capacitacion->titulo = $request->titulo;
         $capacitacion->fecha=$request->fecha;
         $capacitacion->estado=$request->estado;
+
+            $path1 = $request->file('archivo')->storeAs(
+            'public/files', $request->file('archivo')->getClientOriginalName()
+            );
+
+        $array = explode('public',$path1);
+        
+        $capacitacion->archivo = 'storage'.$array[1];
         $capacitacion->save();
         return redirect()->route('admin.capacitaciones.index');
     }
@@ -79,7 +91,7 @@ class CapacitacionController extends Controller
     public function edit($id)
     {
         $Capacitacion=Capacitacion::findOrFail($id);
-        return compact('Capacitacion');
+        return view('dashboard/capacitaciones/edit',compact('Capacitacion'));
     }
 
     /**
@@ -90,21 +102,43 @@ class CapacitacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {    $request->validate(
-        [
-            'expositor'=>'required',
-            'titulo'=> 'required',
-            'fecha'=>'required',
-            'estado'=> 'required'
-        ]
-        );
-        $Capacitacion=Capacitacion::findOrFail($id);
-        $Capacitacion->expositor = $request->expositor;
-        $Capacitacion->titulo = $request->titulo;
-        $Capacitacion->fecha=$request->fecha;
-        $Capacitacion->estado=$request->estado;
-        $Capacitacion->save();
-        return redirect()->route('admin.capacitaciones.index');
+    {   
+        $request->validate(
+            [
+                'expositor'=>'required',
+                'titulo'=> 'required',
+                'fecha'=>'required',
+                'estado'=> 'required',
+                'archivo'=>'nullable|mimes:pdf',
+            ]
+            );
+            $arch = $request->file('archivo');
+            if (!empty($arch)) {
+            $Capacitacion=Capacitacion::findOrFail($id);
+    
+            $Capacitacion->expositor = $request->expositor;
+            $Capacitacion->titulo = $request->titulo;
+            $Capacitacion->fecha=$request->fecha;
+            $Capacitacion->estado=$request->estado;
+            $path1 = $request->file('archivo')->storeAs(
+                'public/files', $request->file('archivo')->getClientOriginalName()
+                );
+    
+            $array = explode('public',$path1);
+            
+            $Capacitacion->archivo = 'storage'.$array[1];
+            $Capacitacion->save();
+            }
+            else{
+            $Capacitacion1=Capacitacion::findOrFail($id);
+            $Capacitacion1->expositor = $request->expositor;
+            $Capacitacion1->titulo = $request->titulo;
+            $Capacitacion1->fecha=$request->fecha;
+            $Capacitacion1->estado=$request->estado;
+            $Capacitacion1->save();
+            }
+        return redirect(route('admin.capacitaciones.index'));
+
     }
 
     /**
