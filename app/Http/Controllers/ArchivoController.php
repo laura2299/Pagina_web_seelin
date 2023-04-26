@@ -26,6 +26,7 @@ class ArchivoController extends Controller
         return view('/pagina_principal/documentos',compact('archivos') );
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *

@@ -337,6 +337,10 @@ return [
                     'text' => 'capacitaciones',
                     'route'  => 'admin.capacitaciones.index',
                 ],
+                [
+                    'text' => 'imagenes',
+                    'route'  => 'admin.imagenes.index',
+                ],
                 
             ],
         ],

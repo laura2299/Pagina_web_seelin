@@ -62,18 +62,21 @@
         <div class="row">
 			<div class="contact">
 				<h1>Inicio de Sesion</h1>
-				<form action="">
-					<label for="Usuario">
+				
+				<form method="POST" action="{{route('inicia-cliente')}}">
+				@csrf
+					<label for="name">
 						<span>Usuario:</span>
-						<input type="text" name="Usuario" id="Usuario">
+						<input type="text" name="name" id="name">
 					</label>
-					<label for="Contraseña">
+					<label for="password">
 						
 						<span>Contraseña:</span>
-						<input type="password" name="Contraseña" id="Contraseña">
+						<input type="password" name="password" id="password">
 						
 					</label>
-					<input id="btn_ing" type="button" value="Ingresar">
+					<button type="submit" class="btn btn-primary">Ingresar</button>
+					<!--<input id="btn_ing" type="button" value="Ingresar">-->
 				</form>
 			</div>
         </div>
