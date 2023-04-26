@@ -1,15 +1,9 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Lista de Usuarios</h1>
-@stop
-
+@extends('layouts.plantillaBase')
 @section('content')
+    <h3>Lista de Usuarios</h3>
     <div class="card">
         <div class="card-header">
-            <a class="btn btn-primary" href="{{ route('register') }}">Nuevo Usuario</a>
+            <a class="btn btn-primary" href="{{ route('admin.users.create') }}">Nuevo Usuario</a>
         </div>
         
         <div class="card-body">

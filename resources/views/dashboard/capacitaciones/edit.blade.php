@@ -1,12 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.plantillaBase')
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Nueva capacitacion</h1>
-@stop
 
 @section('content')
+    <h2>Capacitacion</h2>
     <h2>Editar los siguientes campos</h2>
     <div class="row">
         <div class="col-lg-12">
@@ -61,37 +57,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <!-- Minified Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-@stop
-
-@section('js')
-  
-<script>
-    $('.datepicker').datepicker({
-        format: "yyyy/mm/dd",
-        language: "es",
-        autoclose: true
-    });
-</script>
-<script>
-    // Función para limitar la selección a una sola opción
-    function limitarSeleccion(elem) {
-      var estado = document.getElementsByName("estado");
-      for (var i = 0; i < estado.length; i++) {
-        if (estado[i] !== elem) {
-          estado[i].checked = false;
-        }
-      }
-    }
-  </script>
-    <script> console.log('Hi!'); </script>
-    <!-- Minified JS library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Minified Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
-@stop

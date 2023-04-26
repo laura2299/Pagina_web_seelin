@@ -316,8 +316,17 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'proyectos y mas',
+                    'text' => 'Quienes Somos',
                     'route'  => 'admin.archivosmedia.index',
+                ],
+                [
+                    'text' => 'imagenes',
+                    'route'  => 'admin.imagenes.index',
+                ],
+                [
+                    'text'    => 'clientes',
+                    'route'     => 'admin.clientes.index',
+                    
                 ],
                 [
                     'text'    => 'experiencias',

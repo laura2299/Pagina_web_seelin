@@ -22,6 +22,7 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/w', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
 */
 
 
@@ -29,6 +30,23 @@ Route::get('/w', function () {
 Route::get('/dash', function () {
     return view('dashboard/index');
 });
+=======
+Route::get('/dashboard', function () {
+    return view('dashboard/index');
+})->name('admin.home');
+
+
+
+Route::get('/servicios', function () {
+    return view('pagina_principal/servicios');
+})->name('servicios');
+Route::get('/clientes', function () {
+    return view('pagina_principal/clientes');
+})->name('clientes');
+Route::get('/proyectos', function () {
+    return view('pagina_principal/proyectos');
+})->name('proyectos');
+>>>>>>> fdf72d0fd574365fd15a7e36100e8a0f3037f019
 Route::get('/contactanos', function () {
     return view('pagina_principal/contactanos');
 })->name('contactanos');
@@ -108,10 +126,14 @@ Route::resource('administrador/documentos', ArchivoController::class)->names('ad
 Route::resource('administrador/capacitaciones', CapacitacionController::class)->names('admin.capacitaciones');
 
 // ruta para ver lo relacionado con iimagenes
-Route::resource('administrador/media/imagenes', ImagenController::class)->names('admin.imagenes');
+Route::resource('administrador/imagenes', ImagenController::class)->names('admin.imagenes');
 
 // ruta para ver lo relacionado con users
 Route::resource('administrador/users', UserController::class)->names('admin.users');
 
 // ruta para ver lo relacionado con las experiencias
 Route::resource('administrador/experiencias', TrabajoController::class)->names('admin.experiencias');
+ 
+// ruta para ver lo relacionado con los clientee
+Route::resource('administrador/clientes', ClienteController::class)->names('admin.clientes');
+ 

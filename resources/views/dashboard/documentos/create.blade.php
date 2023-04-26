@@ -1,12 +1,9 @@
-@extends('adminlte::page')
 
-@section('title', 'Dashboard')
 
-@section('content_header')
-    <h1>Crear nuevo </h1>
-@stop
+@extends('layouts.plantillaBase')
 
 @section('content')
+    <h3>Crear nuevo documento</h3>
     <div class="row">
         <div class="col-lg-12">      
 
@@ -56,24 +53,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-<script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
-
-    <script> console.log('Hi!'); </script>
-     <!-- Enlace para el calendario -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-                    <script type="text/javascript">
-        
-
-                <script>
-    $('.datepicker').datepicker({
-        format: "yyyy/mm/dd",
-        language: "es",
-        autoclose: true
-    });
-</script>
-@stop

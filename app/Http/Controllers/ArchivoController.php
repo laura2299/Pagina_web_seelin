@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Archivo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArchivoController extends Controller
 {
@@ -44,10 +45,25 @@ class ArchivoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'archivo'=>'required|mimes:pdf,xlsx',
+            'categoria'=>'required',
+            'fecha'=> 'required',
+            'estado'=>'required'
+        ], [
+            'archivo.required' => 'Por favor, selecciona un archivo de pdf o excel.',
+            'archivo.mimes' => 'El archivo debe ser de tipo PDF o XLSX.'
+        ]);
         
         $miarchivo = new Archivo();
+        
         $miarchivo->name = $request->file('archivo')->getClientOriginalName();
-        $array = explode('public',$request->file('archivo')->store('public/files'));
+            $path1 = $request->file('archivo')->storeAs(
+                'public/files', $request->file('archivo')->getClientOriginalName()
+            );
+
+        $array = explode('public',$path1);
+        
         $miarchivo->path = 'storage'.$array[1];
         $miarchivo->format = $request->file('archivo')->getClientOriginalExtension();
         $miarchivo->fecha_subida= Carbon::now();
@@ -89,11 +105,43 @@ class ArchivoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $archivo=Archivo::findOrFail($id);
-        $archivo->estado=$request->estado;
-        $archivo->fecha = $request->fecha;
-        $archivo->save();
+    {    $request->validate([
+        'archivo'=>'sometimes|mimes:pdf,xlsx',
+        'categoria'=>'required',
+        'fecha'=> 'required',
+        'estado'=>'required'
+    ], [
+        'archivo.mimes' => 'El archivo debe ser de tipo PDF o XLSX.'
+    ]);
+        
+        $documento=$request->file('archivo');
+        if (!empty($documento)) {
+            #guardamos en storage
+            $miarchivo=Archivo::findOrFail($id);
+
+            $miarchivo->name = $request->file('archivo')->getClientOriginalName();
+            $path1 = $request->file('archivo')->storeAs(
+                'public/files', $request->file('archivo')->getClientOriginalName()
+            );
+
+        $array = explode('public',$path1);
+        $miarchivo->path = 'storage'.$array[1];
+        $miarchivo->format = $request->file('archivo')->getClientOriginalExtension();
+
+        
+        $miarchivo->estado=$request->estado;
+        $miarchivo->fecha = $request->fecha;
+        $miarchivo->save();
+        }
+        else {
+        $archivo1=Archivo::findOrFail($id);
+        $archivo1->estado=$request->estado;
+        $archivo1->fecha = $request->fecha;
+        $archivo1->save();
+        }
+        
+        
+        
         return redirect('administrador/documentos');
 
     }
@@ -105,10 +153,11 @@ class ArchivoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {   $miarchivo=Archivo::findOrFail($id);
+        Storage::delete('leidyPatzi_exa272(1).pdf');
         Archivo::destroy($id);
         
-        return redirect()->route('admin.documentos.index');
+        return redirect()->route('admin.documentos.index')->with('mensaje', 'El registro ha sido eliminado correctamente');
         
     }
 }

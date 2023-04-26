@@ -1,12 +1,12 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Lista de documentos</h1>
-@stop
+@extends('layouts.plantillaBase')
 
 @section('content')
+<h2>Lista de Documentos</h2>
+@if(session('mensaje'))
+<div class="alert alert-success">
+    {{ session('mensaje') }}
+</div>
+@endif
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary" href="{{route('admin.documentos.create')}}">Nuevo</a>
@@ -15,7 +15,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Formato</th>
                         <th>Fecha_de_subida</th>
@@ -29,7 +29,7 @@
                 <tbody>
                     @foreach ($Archivos as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
+                            
                             <td>{{$item->name}}</td>
                             <td>{{$item->format}}</td>
                             <td>{{$item->fecha_subida}}</td>
@@ -64,10 +64,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

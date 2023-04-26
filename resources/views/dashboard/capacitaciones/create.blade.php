@@ -1,12 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.plantillaBase')
 
-@section('title', 'Dashboard')
 
-@section('content_header')
-    <h1>Nueva capacitacion</h1>
-@stop
 
 @section('content')
+<h2>Nueva Capacitacion</h2>
     <h2>Complete los siguientes campos</h2>
     <div class="row">
        
@@ -48,10 +45,7 @@
                 {!! Form::submit('Crear', ['class' => 'btn btn-primary']) !!}
     
             {!! Form::close() !!}
-    
-    
-               
-                  
+       
             </div>
     </div>
     
@@ -59,23 +53,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <!-- Minified Bootstrap CSS -->
-
-@stop
-
-@section('js')
-  
-<script>
-    $('.datepicker').datepicker({
-        format: "yyyy/mm/dd",
-        language: "es",
-        autoclose: true
-    });
-</script>
-
-    <script> console.log('Hi!'); </script>
-    <!-- Minified JS library -->
-
-@stop

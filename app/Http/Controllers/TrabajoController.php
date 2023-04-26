@@ -26,8 +26,13 @@ class TrabajoController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         $clientes=Cliente::all();
         return view('dashboard/experiencias/create',compact('clientes'));
+=======
+        $cliente = Cliente::all()->pluck('nombre','id');
+        return view('dashboard/experiencias/create',compact('cliente'));
+>>>>>>> fdf72d0fd574365fd15a7e36100e8a0f3037f019
     }
 
     /**
@@ -37,6 +42,7 @@ class TrabajoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+<<<<<<< HEAD
     {
         $Trabajo = new Trabajo();
         $Trabajo->actividad = $request->actividad;
@@ -45,6 +51,25 @@ class TrabajoController extends Controller
         $Trabajo->estado = $request->estado;
         $Trabajo->id_cliente = $request->id_cliente;
         $Trabajo->save();
+=======
+    {   
+        $request->validate([
+            'actividad'=>'required',
+            'fecha'=>'required',
+            'categoria'=> 'required',
+            'estado'=>'required'
+        ]);
+        
+
+        $trabajo = new Trabajo();
+        $trabajo->actividad = $request->actividad;
+        $trabajo->fecha_inicio = $request->fecha;
+        $trabajo->categoria = $request->categoria;
+        $trabajo->estado = $request->estado;
+        $trabajo->id_cliente = $request->id_cliente;
+        $trabajo->save();
+        
+>>>>>>> fdf72d0fd574365fd15a7e36100e8a0f3037f019
         return redirect()->route('admin.experiencias.index');
     }
 
@@ -67,9 +92,15 @@ class TrabajoController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $trabajo = Trabajo::where('id', $id);
         $clientes=Cliente::all();
         return view('dashboard/experiencias/edit',compact('trabajo','clientes'));
+=======
+        $trabajo=Trabajo::findOrFail($id);
+        $cliente =Cliente::all()->pluck('nombre','id');
+        return view('dashboard/experiencias/edit',compact('trabajo','cliente'));
+>>>>>>> fdf72d0fd574365fd15a7e36100e8a0f3037f019
     }
 
     /**
@@ -81,6 +112,7 @@ class TrabajoController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         $experiencias=Trabajo::findOrFail($id);
         $experiencias->actividad = $request->actividad;
         $experiencias->fecha_inicio = $request->fecha;
@@ -88,6 +120,24 @@ class TrabajoController extends Controller
         $experiencias->estado = $request->estado;
         $experiencias->id_cliente = $request->id_cliente;
         $experiencias->save();
+=======
+        $request->validate([
+            'actividad'=>'required',
+            'fecha'=>'required',
+            'categoria'=> 'required',
+            'estado'=>'required'
+        ]);
+        
+        $trabajo=Trabajo::findOrFail($id);
+        
+        $trabajo->actividad = $request->actividad;
+        $trabajo->fecha_inicio = $request->fecha;
+        $trabajo->categoria = $request->categoria;
+        $trabajo->estado = $request->estado;
+        $trabajo->id_cliente = $request->id_cliente;
+        $trabajo->save();
+        
+>>>>>>> fdf72d0fd574365fd15a7e36100e8a0f3037f019
         return redirect()->route('admin.experiencias.index');
     }
 
@@ -101,6 +151,11 @@ class TrabajoController extends Controller
     {
         Trabajo::destroy($id);
         
+<<<<<<< HEAD
         return redirect()->route('admin.experiencias.index');
+=======
+        return redirect()->route('admin.experiencias.index')->with('mensaje', 'El registro ha sido eliminado correctamente');
+
+>>>>>>> fdf72d0fd574365fd15a7e36100e8a0f3037f019
     }
 }
