@@ -328,6 +328,10 @@ return [
                     'text' => 'capacitaciones',
                     'route'  => 'admin.capacitaciones.index',
                 ],
+                [
+                    'text' => 'imagenes',
+                    'route'  => 'admin.imagenes.index',
+                ],
                 
             ],
         ],
@@ -343,22 +347,7 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        
     ],
 
     /*

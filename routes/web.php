@@ -8,6 +8,7 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\TrabajoController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,64 +18,67 @@ use App\Http\Controllers\TrabajoController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
 
-Route::get('/', function () {
-    return view('pagina_principal/principal');
-})->name('principal');
 Route::get('/w', function () {
     return view('welcome');
 });
+*/
+
+
+
 Route::get('/dash', function () {
     return view('dashboard/index');
 });
-
-
-
-Route::get('/servicios', function () {
-    return view('pagina_principal/servicios');
-})->name('servicios');
-Route::get('/clientes', function () {
-    return view('pagina_principal/clientes');
-})->name('clientes');
-Route::get('/proyectos', function () {
-    return view('pagina_principal/proyectos');
-})->name('proyectos');
 Route::get('/contactanos', function () {
     return view('pagina_principal/contactanos');
 })->name('contactanos');
 Route::get('/inicio_sesion', function () {
     return view('pagina_principal/inicio_sesion');
 })->name('inicio_sesion');
+
 Route::get('/cambio_contraseña', function () {
     return view('pagina_principal/cambio_contraseña');
-})->name('cambio_contraseña');
+})->middleware('auth')->name('cambio_contraseña');
+
 Route::get('/documentos', function () {
     return view('pagina_principal/documentos');
-})->name('documentos');
-
-
-
-
+})->middleware('auth')->name('documentos');
 /*
 Route::get('/capacitaciones' , function () {
     return view('pagina_principal/capacitaciones');
 })->name('capacitaciones');
 Route::get('/capacitaciones', [CapacitacionController::class, 'mostrar']);
 Route::controller(CapacitacionController::class, 'mostrar')->group(function () {
-    
+Route::get('/proyectos', function () {
+    return view('pagina_principal/proyectos');
+})->name('proyectos');
 });
+Route::get('/servicios', function () {
+    return view('pagina_principal/servicios');
+})->name('servicios');
 Route::get('/quienes_somos', function () {
     return view('pagina_principal/quienes_somos');
 })->name('quienes_somos');
-
-
+Route::get('/', function () {
+    return view('pagina_principal/principal');
+})->name('principal');
+Route::get('/clientes', function () {
+    return view('pagina_principal/clientes');
+})->name('clientes');
 */
+
+Route::controller(LoginController::class)->group(function() {
+    Route::post('/inicia-cliente','login_cliente')->name('inicia-cliente');
+    Route::get('/finaliza-cliente','logout_cliente')->name('finaliza-cliente');
+
+});
+
 
 Route::controller(MediaController::class)->group(function () {
     Route::get('/quienes_somos' , 'mostrar_qs' )->name('quienes_somos');
     Route::get('/servicios' , 'mostrar_servicios' )->name('servicios');
     Route::get('/proyectos' , 'mostrar_proyectos' )->name('proyectos');
+    Route::get('/' , 'mostrar_principal' )->name('principal');
 });
 
 Route::controller(CapacitacionController::class)->group(function () {

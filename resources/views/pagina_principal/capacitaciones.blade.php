@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <style>
+    .titulo{
+        color: #24315E;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-style: oblique;
+    }
     .cap_sec{
         border-bottom: 3px solid #16979A;
         border-right: 3px solid #16979A;
@@ -23,7 +28,7 @@
     }
 </style>
 <div class="content-fluid">
-    <h1>Capacitaciones</h1>
+    <h1 class="titulo">Capacitaciones</h1>
     <div class="row">
         @foreach ($capacitaciones as $item)
             <div class="col-5 cap_sec">
@@ -31,7 +36,7 @@
                 <h5>{{$item->expositor}}</h5>
                 <div class="part_abajo">
                     <p>{{$item->fecha}}</p>
-                    <a class="btn_left" href="#">Saber Mas</a>
+                    <a class="btn_left" href="#" target="_blank">Saber Mas</a>
                 </div>
             </div>
         @endforeach     

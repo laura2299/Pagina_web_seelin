@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Trabajo;
+use App\Models\Cliente;
 
 class TrabajoController extends Controller
 {
@@ -25,7 +26,8 @@ class TrabajoController extends Controller
      */
     public function create()
     {
-        return view('dashboard/experiencias/create');
+        $clientes=Cliente::all();
+        return view('dashboard/experiencias/create',compact('clientes'));
     }
 
     /**
@@ -43,7 +45,7 @@ class TrabajoController extends Controller
         $Trabajo->estado = $request->estado;
         $Trabajo->id_cliente = $request->id_cliente;
         $Trabajo->save();
-        return redirect()->route('admin.archivosmedia.index');
+        return redirect()->route('admin.experiencias.index');
     }
 
     /**
@@ -65,7 +67,9 @@ class TrabajoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $trabajo = Trabajo::where('id', $id);
+        $clientes=Cliente::all();
+        return view('dashboard/experiencias/edit',compact('trabajo','clientes'));
     }
 
     /**
@@ -77,7 +81,14 @@ class TrabajoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $experiencias=Trabajo::findOrFail($id);
+        $experiencias->actividad = $request->actividad;
+        $experiencias->fecha_inicio = $request->fecha;
+        $experiencias->categoria = $request->categoria;
+        $experiencias->estado = $request->estado;
+        $experiencias->id_cliente = $request->id_cliente;
+        $experiencias->save();
+        return redirect()->route('admin.experiencias.index');
     }
 
     /**
@@ -88,6 +99,8 @@ class TrabajoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Trabajo::destroy($id);
+        
+        return redirect()->route('admin.experiencias.index');
     }
 }

@@ -22,6 +22,13 @@
 
     .img_c{
         min-width: 400px;
+        max-width: 500px;
+        height: 250px;
+    }
+    .img_c img{
+        min-height:200px;
+        max-width: 400px;
+        max-height: 250px;
     }
     .c_text{
         min-width: 400px;
@@ -31,14 +38,47 @@
 </style>
 <div class="container-q">
     <h1>¿QUIENES SOMOS?</h1>
-
-
     @foreach ($medias as $item)
         @if ($item->estado == 'Habilitado')
-            @if ($item->name == 'titulo')
+            @if ($item->name == 'titulo quienes somos')
                 <div class="row c_fila">
                     <div class="col-4 img_c">
-                        <img src="img/12.jpg" alt="" class="img-fluid">
+                        @for ($i = 0; $i < sizeof($imagenes); $i++)
+                            @if ($imagenes[$i]!='[]')
+                                @if ($imagenes[$i][0]->id_media == $item->id)
+                                    @if (sizeof($imagenes[$i])>1)
+                                        <div id="carouselExampleIndicators<?php echo $item->id;?>" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-indicators">
+                                                <button type="button" data-bs-target="#carouselExampleIndicators<?php echo $item->id;?>" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                                @for ($j = 1; $j < sizeof($imagenes[$i]); $j++)
+                                                    <button type="button" data-bs-target="#carouselExampleIndicators<?php echo $item->id;?>" data-bs-slide-to="<?php echo $j;?>" aria-label="Slide <?php echo $j+1;?>"></button>
+                                                @endfor
+                                            </div>
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                <img src="{{$imagenes[$i][0]->archivo}}" class="d-block w-100" alt="{{$imagenes[$i][0]->name}}">
+                                                </div>
+                                                @for ($j = 1; $j < sizeof($imagenes[$i]); $j++)
+                                                    <div class="carousel-item">
+                                                    <img src="{{$imagenes[$i][$j]->archivo}}" class="d-block w-100" alt="{{$imagenes[$i][$j]->name}}">
+                                                    </div>
+                                                @endfor
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<?php echo $item->id;?>" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<?php echo $item->id;?>" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                    @else
+                                        <img src="{{$imagenes[$i][0]->archivo}}" alt="{{$imagenes[$i][0]->name}}" class="img-fluid">
+                                    @endif
+                                @endif
+                            @endif
+                        @endfor 
                     </div>
                     <div class="col-6 c_text">
                         <p>{{$item->descripcion}}</p>
@@ -47,156 +87,53 @@
             @else
                 <div class="row c_fila">
                     <div class="col-4 img_c">
-                        <img src="img/12.jpg" alt="" class="img-fluid">
+                    @for ($i = 0; $i < sizeof($imagenes); $i++)
+                        @if ($imagenes[$i]!='[]')
+                            @if ($imagenes[$i][0]->id_media == $item->id)
+                                @if (sizeof($imagenes[$i])>1)
+                                    <div id="carouselExampleIndicators<?php echo $item->id;?>" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-indicators">
+                                            <button type="button" data-bs-target="#carouselExampleIndicators<?php echo $item->id;?>" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                            @for ($j = 1; $j < sizeof($imagenes[$i]); $j++)
+                                                <button type="button" data-bs-target="#carouselExampleIndicators<?php echo $item->id;?>" data-bs-slide-to="<?php echo $j;?>" aria-label="Slide <?php echo $j+1;?>"></button>
+                                            @endfor
+                                        </div>
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                            <img src="{{$imagenes[$i][0]->archivo}}" class="d-block w-100" alt="{{$imagenes[$i][0]->name}}">
+                                            </div>
+                                            @for ($j = 1; $j < sizeof($imagenes[$i]); $j++)
+                                                <div class="carousel-item">
+                                                <img src="{{$imagenes[$i][$j]->archivo}}" class="d-block w-100" alt="{{$imagenes[$i][$j]->name}}">
+                                                </div>
+                                            @endfor
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<?php echo $item->id;?>" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<?php echo $item->id;?>" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                @else
+                                    <img src="{{$imagenes[$i][0]->archivo}}" alt="{{$imagenes[$i][0]->name}}" class="img-fluid">
+                                @endif
+                            @endif
+                        @endif
+                    @endfor 
                     </div>
                     <div class="col-6 c_text">
                         <h2>{{$item->name}}</h2>
                         <p>{{$item->descripcion}}</p>
+                        
                     </div>
                 </div>
             @endif
         @endif
     @endforeach 
 
-    <!--
     
-    <div class="row c_fila">
-        <div class="col-4 img_c">
-            <img src="img/12.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="col-6 c_text">
-            <h2>MISION</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, 
-                adipisicing elit. Animi dignissimos odio 
-                tempore magni ut debitis necessitatibus rerum 
-                perspiciatis inventore soluta cumque officiis blanditiis 
-                neque at cum, accusamus ullam doloremque Lorem ipsum 
-                dolor nimi deleniti harum sed? Dicta rem nesciunt 
-                debitis totam maiores suscipit, cupiditate atque labore?</p>
-        </div>
-    </div>
-    <div class="row c_fila">
-        <div class="col-4 img_c">
-            <img src="img/12.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="col-6 c_text">
-            <h2>VISION</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, 
-                adipisicing elit. Animi dignissimos odio 
-                tempore magni ut debitis necessitatibus rerum 
-                perspiciatis inventore soluta cumque officiis blanditiis 
-                neque at cum, accusamus ullam doloremque Lorem ipsum 
-                dolor nimi deleniti harum sed? Dicta rem nesciunt 
-                debitis totam maiores suscipit, cupiditate atque labore?</p>
-        </div>
-    </div>
-    <div class="row c_fila">
-        <div class="col-4 img_c">
-            <img src="img/12.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="col-6 c_text">
-            <h2>VALORES</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, 
-                adipisicing elit. Animi dignissimos odio 
-                tempore magni ut debitis necessitatibus rerum 
-                perspiciatis inventore soluta cumque officiis blanditiis 
-                neque at cum, accusamus ullam doloremque Lorem ipsum 
-                dolor nimi deleniti harum sed? Dicta rem nesciunt 
-                debitis totam maiores suscipit, cupiditate atque labore?</p>
-        </div>
-    </div>
-    <div class="row c_fila">
-        <div class="col-4 img_c">
-            <img src="img/12.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="col-6 c_text">
-            <h2>SEGURIDAD INDUSTRIAL</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, 
-                adipisicing elit. Animi dignissimos odio 
-                tempore magni ut debitis necessitatibus rerum 
-                perspiciatis inventore soluta cumque officiis blanditiis 
-                neque at cum, accusamus ullam doloremque Lorem ipsum 
-                dolor nimi deleniti harum sed? Dicta rem nesciunt 
-                debitis totam maiores suscipit, cupiditate atque labore?</p>
-        </div>
-    </div>
-
-
--->
-<!--
-    <h1>¿QUIENES SOMOS?</h1>
-    <div class="row borde">
-        <div class="col-4 img_c ">
-            <img src="img/12.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="col-6 parra">
-            <p>Lorem ipsum dolor sit amet consectetur, 
-                adipisicing elit. Animi dignissimos odio 
-                tempore magni ut debitis necessitatibus rerum 
-                perspiciatis inventore soluta cumque officiis blanditiis 
-                neque at cum, accusamus ullam doloremque Lorem ipsum dolor nimi deleniti harum sed? Dicta rem nesciunt debitis totam maiores suscipit, cupiditate atque labore?</p>
-        </div>
-
-    </div>
-    <div class="linea-2"></div>
-    <div class="row borde">
-            <div class="col-6 parra dos">
-                <h2 style="text-align:left;">MISION</h2>
-                <p style="padding-left:0% ">Lorem ipsum dolor sit amet consectetur, 
-                    adipisicing elit. Animi dignissimos odio 
-                    tempore magni ut debitis necessitatibus rerum 
-                    perspiciatis inventore soluta cumque officiis blanditiis 
-                    neque at cum, accusamus ullam doloremque Lorem ipsum dolor nimi deleniti harum sed? Dicta rem nesciunt debitis totam maiores suscipit, cupiditate atque labore?</p>
-            </div>
-            <div class="col-4 img_c dos">
-                <img src="img/12.jpg" alt="" class="img-fluid">
-            </div>
-    </div>
-    <div class="linea-2"></div>
-    <div class="row borde">
-        <div class="col-4 img_c ">
-            <img src="img/12.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="col-6 parra">
-            <h2 style="text-align:right;">VISION</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, 
-                adipisicing elit. Animi dignissimos odio 
-                tempore magni ut debitis necessitatibus rerum 
-                perspiciatis inventore soluta cumque officiis blanditiis 
-                neque at cum, accusamus ullam doloremque Lorem ipsum dolor nimi deleniti harum sed? Dicta rem nesciunt debitis totam maiores suscipit, cupiditate atque labore?</p>
-        </div>
-    </div>
-    <div class="linea-2"></div>
-    <div class="row borde">
-
-        <div class="col-6 parra dos">
-            <h2 style="text-align:left;">VALORES</h2>
-            <p style="padding-left:0% ">Lorem ipsum dolor sit amet consectetur, 
-                adipisicing elit. Animi dignissimos odio 
-                tempore magni ut debitis necessitatibus rerum 
-                perspiciatis inventore soluta cumque officiis blanditiis 
-                neque at cum, accusamus ullam doloremque Lorem ipsum dolor nimi deleniti harum sed? Dicta rem nesciunt debitis totam maiores suscipit, cupiditate atque labore?</p>
-        </div>
-        <div class="col-4 img_c dos">
-            <br>
-            <img src="img/12.jpg" alt="" class="img-fluid" >
-        </div>
-    
-    </div>
-    <div class="linea-2"></div>
-    <div class="row borde">
-        <div class="col-4 img_c ">
-            <img src="img/12.jpg" alt="" class="img-fluid">
-        </div>
-        <div class="col-6 parra">
-            <h2 style="text-align:right;">SEGURIDAD INDUSTRIAL</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, 
-                adipisicing elit. Animi dignissimos odio 
-                tempore magni ut debitis necessitatibus rerum 
-                perspiciatis inventore soluta cumque officiis blanditiis 
-                neque at cum, accusamus ullam doloremque Lorem ipsum dolor nimi deleniti harum sed? Dicta rem nesciunt debitis totam maiores suscipit, cupiditate atque labore?</p>
-        </div>
-    </div>
--->
 </div>
 @endsection

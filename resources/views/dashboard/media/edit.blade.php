@@ -10,7 +10,7 @@
     <h2>Editar los siguientes campos</h2>
     <div class="row">
         <div class="col-lg-12">
-          {!! Form::model($media,['route'=>['admin.documentos.update',$media],'method'=>'put']) !!}
+          {!! Form::model($media,['route'=>['admin.archivosmedia.update',$media],'method'=>'put']) !!}
 
           
               <div class="form-group">

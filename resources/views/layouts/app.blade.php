@@ -29,14 +29,11 @@
     -->
     <!-- Site CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <title>Principal</title>
-
 </head>
 
-<body
-    style="
-    background: rgb(255, 255, 255);
+<body style="background: rgb(255, 255, 255);
     background: linear-gradient(90deg, rgba(225, 253, 249, 0.858) 0%, rgb(206, 218, 241) 37%, rgba(219, 230, 239, 0.818) 100%);">
+    
     <style>
        #barra_arriba{display: flex; flex-direction: row; background-color: #24315E;height: 45px;width: 100%;color:#fff; padding:10px;}
        #barra_arriba a{text-decoration:none;color:white;}
@@ -203,10 +200,6 @@
 			position:fixed;
 			bottom:0px;
 			right:0;
-            /*
-            background:white;
-            border:5px solid #16979A;
-            */
             background: #25D366;
             border:5px solid white;
             border-radius:30px;
@@ -216,33 +209,37 @@
         .whats a ion-icon{
             width:80px;
             height:80px;
-            /*
-            color: #24315E;
-            */
             color: white;
         }
         .whats:hover{
-            background:#16979A;
-            border:5px solid #24315E;
+            transform:translateY(-10px);
         }
-        .whats:hover a ion-icon{
-            color:white;
+        .btn_oculto{
+            background:none;
+            border:none;
+            margin: 0px;
+            padding:0px;
         }
     </style>
     <div id="app">
-
     <div id="barra_arriba">
             <div id="social">
-                <ion-icon name="logo-whatsapp"></ion-icon>
-                <ion-icon name="logo-facebook"></ion-icon>
-                <ion-icon name="globe-outline"></ion-icon>
-                <ion-icon name="mail-outline"></ion-icon>
+                <a href="https://www.facebook.com/seelin.ingenieria/" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+                <!--<a href="#"><ion-icon name="globe-outline"></ion-icon></a>-->
+                <a href="mailto:info@seelin.bo?subject=Preguntas y dudas"><ion-icon name="mail-outline"></ion-icon></a>
             </div>
             <div id="sesion">
                 <div class="icono" id="mnc">
-                    <a href="{{ route('principal') }}" >Cerrar Sesión</a>
+                    <!--
+                    <form action="{{ route('finaliza-cliente') }}" method="get">
+                        <button type="submit" class="btn_oculto"></button>
+                    </form>-->
+                    <?php $id = session_id();echo $id;?>
+                    <a href="{{ route('finaliza-cliente') }}">Cerrar Sesion</a>
+                    @if (session('status'))
                     <a href="{{ route('cambio_contraseña') }}">Configuración</a>
                     <a href="{{ route('documentos') }}">Documentos</a>
+                    @endif
                     <a href="{{ route('inicio_sesion') }}">Inicio Sesion</a>
                 </div>  
                 <a href="javascript:void(0);" class="iconito" onclick="miFun2()"><ion-icon name="person-circle-outline"></ion-icon></a>
@@ -293,42 +290,12 @@
             </div>
         </nav>
 
-        <!---contenido--->
         @yield('content') @section('content')
 
         <div class="whats">
 		    <a href="https://api.whatsapp.com/send/?phone=59172572458" target="_blank"><ion-icon name="logo-whatsapp"></ion-icon></a>
 		</div>
 
-        <!---footer---> 
-        <!--Footer 1-->
-        <!--
-        <footer>
-            <div class="linea"></div>
-            <div class="container__footer">
-                <div class="box__footer">
-                    <div class="logo">
-                        <img src="img/logoselin2.png" alt="">
-                    </div>
-                </div>
-                <div class="box__footer">
-                    <h4>Cels.: (591) 77527110 – 75810501 – 75810503</h4>
-                    <h4>Telf./Fax.: (591-2) 2233910 – 2232362</h4>
-                    <h4>info@seelin.bo</h4>
-                </div>
-                <div class="box__footer">
-                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-                    <a href="/Pagina_web_seelin/public/contactanos" class="btn btn-personalizado btn-lg " style="color:#ffffff;">Contactanos</a>
-                </div>
-            </div>
-            <div class="linea"></div>
-            <div class="container-fluid bg-light text-center">
-                <p class="small " style="text-align:center">Calle Roberto Hinojosa Nº 1875, Zona San Antonio, La Paz Bolivia.</p>
-            </div>
-        </footer> 
-                -->
-        <!--Footer 1-->
         <style>
             footer{
                 display:flex;
@@ -405,9 +372,7 @@
                   </div>
                   <div class="contactanos_f col-3">
                     <a href="/Pagina_web_seelin/public/contactanos">Contactanos</a>
-                    <br>
-                    <a href="#"><ion-icon name="logo-whatsapp"></ion-icon>   WhatsApp</a>
-                  </div>
+                 </div>
                 </div>
                 <div class="row fin">
                     <h6>Calle Roberto Hinojosa Nº 1875, Zona San Antonio, La Paz Bolivia.</h6>

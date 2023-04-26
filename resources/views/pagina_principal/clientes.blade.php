@@ -162,7 +162,6 @@
         <div class="container-fluid">
         <div class="row">
             @foreach ($clientes as $item)
-                
                 @if ($item->estado == 'Habilitado' )
                     <div class="col-3 cliente_box">
                         <div class="boton-m">
@@ -175,71 +174,6 @@
                     </div>
                 @endif 
             @endforeach 
-                
-            <!--
-            <div class="col-3 cliente_box">
-                <div class="boton-m">
-                    <img src="img/elfec.jpg" alt="Imagen" >  
-                    <h4>De la Paz</h4>
-                    <label for="btn-m" id="COPERCONS" class="boton_e" onclick="lista_Exp(this.id)">
-                        Ver Trabajos
-                    </label>
-                </div>  
-                                     
-            </div>
-            <div class="col-3 cliente_box"> 
-                <div class="boton-m">
-                    <img src="img/ende-vallehermoso.png"  alt="Imagen" > 
-                    <h4>De la Paz</h4>
-                    <label for="btn-m" class="boton_e" id="EJEMPLO" onclick="lista_Exp(this.id)">
-                        Ver Trabajos
-                    </label>
-                </div> 
-                                      
-            </div>  
-            <div class="col-3 cliente_box ">
-                    <img src="img/cobee.png" alt="Imagen">                   
-            </div>
-            <div class="col-3 cliente_box">
-                    <img src="img/entel_bolivia_logosvg.png" alt="Imagen">                   
-            </div>
-            <div class="col-3 cliente_box"> 
-                    <img src="img/lC1.png" alt="Imagen">                   
-            </div>
-
-        
-            <div class="col-3 cliente_box ">
-                    <img src="img/Screenshot_1.png" alt="Imagen">                   
-            </div>
-            <div class="col-3 cliente_box">
-                    <img src="img/Screenshot_2.png" alt="Imagen">                   
-            </div>
-            <div class="col-3 cliente_box"> 
-                    <img src="img/Screenshot_4.png" alt="Imagen">                   
-            </div>
-
-        
-            <div class="col-3 cliente_box ">
-                    <img src="img/hb.jpg" alt="Imagen">                   
-            </div>
-            <div class="col-3 cliente_box">
-                    <img src="img/Screenshot_5.png" alt="Imagen">                   
-            </div>
-            <div class="col-3 cliente_box"> 
-                    <img src="img/Screenshot_7.png" alt="Imagen">                   
-            </div>
-        
-        
-            <div class="col-3 cliente_box ">
-                    <img src="img/Screenshot_6.png" alt="Imagen">                   
-            </div>
-            <div class="col-3 cliente_box">
-                    <img src="img/Screenshot_3.png" alt="Imagen">                   
-            </div>
-            <div class="col-3 cliente_box"> 
-                    <img src="img/sinchi_wayra.jpg" alt="Imagen">                   
-            </div>
-        -->
         </div>
     </div>
     <div id="tabla_oculta">
@@ -255,6 +189,7 @@
             </thead>
             <tbody>
             @foreach ($trabajos as $item2)
+                
                 @if ($item2->estado == 'Habilitado')
                     <tr>
                         <th>1</th>
@@ -264,38 +199,7 @@
                         <th>{{$item2->categoria}}</th>
                     </tr>
                 @endif
-
             @endforeach 
-                <!--
-                <tr>
-                    <th>2</th>
-                    <th>DELAPAZ</th>
-                    <th>EXTENSIÓN DE RED EN MEDIA TENSION CON TRANSFORMADOR DE 15 KVA PARA BOMBA DE AGUA EN LA COMUNIDAD TANANA</th>
-                    <th>2022-11</th>
-                    <th>CONSULTORIA</th>
-                </tr>
-                <tr>
-                    <th>3</th>
-                    <th>COPERCONS</th>
-                    <th>EXTENSIÓN DE RED EN MEDIA TENSION CON TRANSFORMADOR DE 15 KVA PARA BOMBA DE AGUA EN LA COMUNIDAD TANANA</th>
-                    <th>2022-11</th>
-                    <th>CONSULTORIA</th>
-                </tr>
-                <tr>
-                    <th>4</th>
-                    <th>DELAPAZ</th>
-                    <th>EXTENSIÓN DE RED EN MEDIA TENSION CON TRANSFORMADOR DE 15 KVA PARA BOMBA DE AGUA EN LA COMUNIDAD TANANA</th>
-                    <th>2022-11</th>
-                    <th>CONSTRUCCION</th>
-                </tr>
-                <tr>
-                    <th>5</th>
-                    <th>COPERCONS</th>
-                    <th>EXTENSIÓN DE RED EN MEDIA TENSION CON TRANSFORMADOR DE 15 KVA PARA BOMBA DE AGUA EN LA COMUNIDAD TANANA</th>
-                    <th>2022-11</th>
-                    <th>CONSULTORIA</th>
-                </tr>
-        -->
             </tbody>
         </table>
     </div>
@@ -309,6 +213,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Actividad</th>
                             <th>Fecha Inicio</th>
                             <th>Tipo</th>
@@ -344,11 +249,12 @@
             var mh=document.getElementById("mod_h4");
             mh.innerText=nombre;
             var y;
-            
+            var c=1;
             for (let i = 1; i < x.rows.length; i++) {
                 y=x.rows[i].cells;
                 if (y[1].innerHTML==id) {
-                    tabi.insertRow(-1).innerHTML='<td>'+y[2].innerHTML+'</td><td>'+y[3].innerHTML.slice(0,10)+'</td><td>'+y[4].innerHTML+'</td>';
+                    tabi.insertRow(-1).innerHTML='<td>'+c+'</td><td>'+y[2].innerHTML+'</td><td style="width:100px;">'+y[3].innerHTML.slice(0,10)+'</td><td>'+y[4].innerHTML+'</td>';
+                    c++;
                 }
             }
         }

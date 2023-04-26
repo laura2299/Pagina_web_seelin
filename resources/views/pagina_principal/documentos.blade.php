@@ -59,6 +59,7 @@
 	<div class="container-fluid">
 		<h1>DOCUMENTOS</h1>
 		<br>
+		
 			<div id="forms">
 				<form action="">
 					<h3>BUSCADOR</h3>
@@ -95,39 +96,19 @@
 				</tr>
 			</thead>
 			<tbody>
-
+			<?php $c=1 ?>
 				@foreach ($archivos as $item)
 					<tr>
-						<th scope="row">1</th>
+						<th scope="row"><?php echo $c;?></th>
 						<td>{{$item->name}}</td>
 						<td>{{$item->categoria}}</td>
-						<td><a href="#"><ion-icon name="open-outline"></ion-icon></a></td>
-						<td><a href="#"><ion-icon name="download-outline"></ion-icon></a></td>
+						<td><a href="{{$item->path}}" target="_blank"><ion-icon name="open-outline"></ion-icon></a></td>
+						<td><a href="#" target="_blank"><ion-icon name="download-outline"></ion-icon></a></td>
 						<td>{{$item->fecha}}</td>
-						<td>{{$item->path}}</td>
+						<td></td>
 					</tr>
+					<?php $c=$c+1;?>
 				@endforeach 
-				<!--
-				
-				<tr>
-					<th scope="row">2</th>
-					<td>Estado de equipos revisados en zona principal de trabajo</td>
-					<td>Reporte</td>
-					<td><a href="#"><ion-icon name="open-outline"></ion-icon></a></td>
-					<td><a href="#"><ion-icon name="download-outline"></ion-icon></a></td>
-					<td>08/10/23</td>
-					<td>1563 Kb</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Estado de equipos revisados en zona principal de trabajo</td>
-					<td>Reporte</td>
-					<td><a href="#"><ion-icon name="open-outline"></ion-icon></a></td>
-					<td><a href="#"><ion-icon name="download-outline"></ion-icon></a></td>
-					<td>08/10/23</td>
-					<td>1563 Kb</td>
-				</tr>
-	-->
 			</tbody>
 		</table>
 		@endisset

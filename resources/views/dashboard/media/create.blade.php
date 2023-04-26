@@ -9,7 +9,6 @@
 @section('content')
     <h2>Complete los siguientes campos</h2>
     <div class="row">
-
         <div class="col-lg-12">
           {!! Form::open(['route'=> 'admin.archivosmedia.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
           <!--//aun falta cambiar si el pedido lo hizo el cliente o camarero-->   

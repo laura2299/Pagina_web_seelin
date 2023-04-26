@@ -3,31 +3,35 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Nueva capacitacion</h1>
+    <h1>Nueva Experiencia</h1>
 @stop
 
 @section('content')
     <h2>Complete los siguientes campos</h2>
     <div class="row">
         <div class="col-lg-12">
-            
-            <form action="{{route('admin.capacitaciones.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('admin.experiencias.store')}}" method="post">
                 @csrf
-                <label for="expositor">Nombre del Expositor:</label>
+                <label for="actividad">Nombre del Actividad:</label>
                 <br>
-                <input type="text" id="expositor" name="expositor">
+                <input type="text" id="actividad" name="actividad">
                 <br>
-                <label for="titulo">Nombre de la Capacitación:</label>
+                <label for="categoria">Nombre de la Categoria:</label>
                 <br>
-                <input type="text" id="titulo" name="titulo">
+                <input type="text" id="categoria" name="categoria">
                 <br>
-                <label for="fecha">Fecha de la Capacitacion yyyy-mm-dd:</label>
-                <div class="input-group">
-                    <input type="text" class="form-control datepicker" name="fecha">
-                    <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-th"></span>
-                    </div>
-                </div>                                
+                <label for="id_cliente">Id Cliente:</label>
+                <br>
+                <input list="clientes" id="id_cliente" name="id_cliente">
+                <datalist name="clientes" id="clientes">
+                @foreach ($clientes as $item)
+                    <option value="{{$item->id}}">{{$item->nombre}}</option>
+                @endforeach  
+                </datalist>
+                <br>
+                <label for="fecha">Fecha Inicio:</label>
+                <br>
+                <input type="date" id="fecha" name="fecha">                     
                 <br>
                 <br>
                 <label for="estado">Estado:</label><br>
@@ -45,7 +49,7 @@
                 <br>
                 
                 <br>
-                <input type="submit" value="Crear Capacitacion" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se creara el nuevo registro, ¿esta seguro?')">
+                <input type="submit" value="Crear Experiencia" class="btn btn-warning" style="width: 150px" onclick="return confirm('Se creara el nuevo registro, ¿esta seguro?')">
 
               </form>
               
@@ -59,8 +63,7 @@
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <!-- Minified Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
 @stop
 
 @section('js')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Capacitacion;
+use App\Models\Archivo;
 use Illuminate\Http\Request;
 
 class CapacitacionController extends Controller
