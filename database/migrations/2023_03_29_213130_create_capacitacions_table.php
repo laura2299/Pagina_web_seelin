@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->date('fecha');
             $table->string('estado');
+            $table->string('archivo');
             $table->timestamps();
         });
     }

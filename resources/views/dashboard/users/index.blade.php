@@ -1,5 +1,10 @@
 @extends('layouts.plantillaBase')
 @section('content')
+@if(session('mensaje'))
+<div class="alert alert-success">
+    {{ session('mensaje') }}
+</div>
+@endif
     <h3>Lista de Usuarios</h3>
     <div class="card">
         <div class="card-header">
@@ -12,9 +17,10 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Email</th>
+                        <th>Apellido</th>
+                        <th>Usuario</th>
                         <th>Password</th>
-                        
+                        <th>Role</th>
                         <th colspan="2"></th>
                         
                     </tr>
@@ -24,14 +30,13 @@
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
-                            <td>{{$item->email}}</td>
+                            <td>{{$item->lastName}}</td>
+                            <td>{{$item->usuario}}</td>
                             <td>{{$item->password}}</td>
+                            <td>{{$item->role}}</td>
                             
-                            <td>
-                                <a class="btn btn-primary btn-sm" href="{{route('admin.archivosmedia.edit',$item->id)}}">Editar</a>
-                            </td>
                             <td> 
-                                <form action="{{route('admin.archivosmedia.destroy',$item->id)}}" method="post">
+                                <form action="{{route('admin.users.destroy',$item->id)}}" method="post">
                                  @csrf
                                  <!--  covertimos el metod_field en delete ya que es lo que espera la funcion store del controlador -->
                                 {{method_field('DELETE')}}
@@ -50,10 +55,3 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

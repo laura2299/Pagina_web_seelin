@@ -71,7 +71,7 @@ class ClienteController extends Controller
 
         $array = explode('public',$path1);
         
-        $cliente1->archivo = 'storage'.$array[1];
+        $cliente1->logo = 'storage'.$array[1];
             $cliente1->estado= $request->estado;
             
             $cliente1->save();   
