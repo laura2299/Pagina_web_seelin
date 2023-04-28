@@ -27,14 +27,13 @@ Route::get('/w', function () {
 
 
 
-Route::get('/dash', function () {
-    return view('dashboard/index');
-});
+
+/*
 Route::get('/dashboard', function () {
     return view('dashboard/index');
 })->name('admin.home');
 
-
+*/
 
 Route::get('/servicios', function () {
     return view('pagina_principal/servicios');
@@ -52,15 +51,24 @@ Route::get('/contactanos', function () {
 
 Route::get('/cambio_contraseña', function () {
     return view('pagina_principal/cambio_contraseña');
-})->middleware('auth')->name('cambio_contraseña');
+})->middleware('can:cambio_contraseña')->name('cambio_contraseña');
 
 Route::get('/documentos', function () {
     return view('pagina_principal/documentos');
-})->name('documentos');
-/*
+})->middleware('can:documentos')->name('documentos');
+
+
+
 Route::get('/inicio_sesion', function () {
     return view('pagina_principal/inicio_sesion');
 })->name('inicio_sesion');
+
+Route::controller(ArchivoController::class)->group(function () {
+    Route::post('documentos_res' , 'buscar_doc' )->name('documentos_res');
+});
+
+/*
+Route::post('/documentos_res', [ArchivoController::class, 'buscar_doc'])->name('documentos_res');
 
 Route::get('/capacitaciones' , function () {
     return view('pagina_principal/capacitaciones');
@@ -85,12 +93,13 @@ Route::get('/clientes', function () {
 })->name('clientes');
 */
 /*
-Route::controller(LoginController::class)->group(function() {
-    Route::post('/inicia-cliente','login_cliente')->name('inicia-cliente');
-    Route::get('/finaliza-cliente','logout_cliente')->name('finaliza-cliente');
-});
+
 */
 
+Route::controller(LoginController::class)->group(function() {
+    Route::post('/inicia-usuario','login_usuario')->name('inicia-usuario');
+    Route::get('/finaliza-usuario','logout_usuario')->name('finaliza-usuario');
+});
 Route::controller(MediaController::class)->group(function () {
     Route::get('/quienes_somos' , 'mostrar_qs' )->name('quienes_somos');
     Route::get('/servicios' , 'mostrar_servicios' )->name('servicios');
@@ -105,19 +114,19 @@ Route::controller(CapacitacionController::class)->group(function () {
 Route::controller(ClienteController::class)->group(function () {
     Route::get('/clientes' , 'mostrar' )->name('clientes');
 });
-
-Route::controller(ArchivoController::class)->group(function () {
-    Route::get('/documentos_res' , 'mostrar' )->name('documentos_res');
+Route::controller(UserController::class)->group(function () {
+    Route::post('/cambio_contraseña_U' , 'cambio_contra' )->name('cambio_contraseña_U');
 });
+
+
 
 
 Auth::routes();
 
-Route::controller(LoginController::class)->group(function() {
-    Route::get('/logout_u','logout_u')->name('logout_u');
-});
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dash', function () {
+    return view('dashboard/index');
+})->middleware('can:admin.home')->name('/dash');
 
 // ruta para ver lo relacionado con media
 Route::resource('administrador/media', MediaController::class)->names('admin.archivosmedia');

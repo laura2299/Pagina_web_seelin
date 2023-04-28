@@ -45,16 +45,20 @@
 			padding: 5px;
 		}
 
-		#btn_ing{
-			max-width: 500px;
+		#btn_busc{
+			max-width: 400px;
 			width:100%;
 			align-self:center;
+			text-align:center;
+			padding: 5px;
+			text-decoration:none;
+			border: 3px solid #16979A;
+			border-radius: 8px;
 		}
-		#btn_ing:hover{
+		#btn_busc:hover{
 			background:#16979A;
 			color:white;
 		}
-
 	</style>
 
     <div class="container-fluid">
@@ -62,22 +66,45 @@
         <div class="row">
 			<div class="contact">
 				<h1>Cambio Contraseña</h1>
-				<form action="">
-					<label for="Contraseña">
-						<span>Contraseña:</span>
-						<input type="text" name="Contraseña" id="Contraseña">
-					</label>
+				@if(isset($mess))
+					{{$mess}}
+					@endif
+				<form method="POST" action="{{ route('cambio_contraseña_U') }}" id="formulario_subir">
+				@csrf
+					
 					<label for="nueva_contraseña">
 						<span>Nueva Contraseña:</span>
 						<input type="text" name="nueva_contraseña" id="nueva_contraseña">
 					</label>
-					<label for="repita_contraseña">
+					<label for="confirm_contraseña">
 						<span>Repita Contraseña:</span>
-						<input type="password" name="repita_contraseña" id="repita_contraseña">
+						<input type="password" name="confirm_contraseña" id="confirm_contraseña">
 					</label>
-					<input id="btn_ing" type="button" value="Ingresar">
+					<p id="men_fecha"></p>
 				</form>
+				<button id="btn_busc" onclick="verificar()">Buscar</button>
 			</div>
         </div>
     </div>
+	<script>
+		function verificar(){
+			var nueva_contraseña=document.getElementById("nueva_contraseña").value;
+			var confirm_contraseña=document.getElementById("confirm_contraseña").value;
+			if(nueva_contraseña != confirm_contraseña){
+				var men=document.getElementById("men_fecha");
+				men.innerText="No concuerdan las contraseñas";
+			}else{
+				if (nueva_contraseña.length < 8) {
+					var men=document.getElementById("men_fecha");
+					men.innerText="Tiene que tener al menos 8 digitos";
+				}else{
+					var men=document.getElementById("men_fecha");
+					men.innerText="";
+					document.getElementById("formulario_subir").submit();
+				}
+				
+			}
+
+		}
+	</script>
 @endsection

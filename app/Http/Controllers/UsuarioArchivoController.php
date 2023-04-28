@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class UsuarioArchivoController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.users.index')->only('index');
+        $this->middleware('can:admin.users.create')->only('create');
+        $this->middleware('can:admin.users.store')->only('store');
+        $this->middleware('can:admin.users.edit')->only('edit');
+        $this->middleware('can:admin.users.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

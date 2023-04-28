@@ -229,17 +229,25 @@
                 <a href="mailto:info@seelin.bo?subject=Preguntas y dudas"><ion-icon name="mail-outline"></ion-icon></a>
             </div>
             <div id="sesion">
+
                 <div class="icono" id="mnc">
                     
                     <?php $id = session_id();echo $id;?>
                     
-                    <a href="{{ route('logout_u') }}">Cerrar Sesion</a>
                     
+                    @can('cambio_contraseña')
+                    <a href="{{ route('finaliza-usuario') }}">Cerrar Sesion</a>
                     <a href="{{ route('cambio_contraseña') }}">Configuración</a>
+                    @endcan
+                    @can('documentos')
                     <a href="{{ route('documentos') }}">Documentos</a>
-                    
-                    <a href="{{ route('login') }}">Inicio Sesion</a>
-                </div>  
+                    @endcan
+
+                    <a href="{{ route('inicio_sesion') }}">Inicio Sesion</a>
+                </div>
+                @can('cambio_contraseña')
+                {{auth()->user()->name}}
+                @endcan  
                 <a href="javascript:void(0);" class="iconito" onclick="miFun2()"><ion-icon name="person-circle-outline"></ion-icon></a>
                 
             </div>

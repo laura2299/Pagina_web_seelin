@@ -7,7 +7,14 @@ use App\Models\Archivo;
 use Illuminate\Http\Request;
 
 class CapacitacionController extends Controller
-{
+{   
+    public function __construct(){
+        $this->middleware('can:admin.capacitaciones.index')->only('index');
+        $this->middleware('can:admin.capacitaciones.create')->only('create');
+        $this->middleware('can:admin.capacitaciones.store')->only('store');
+        $this->middleware('can:admin.capacitaciones.edit')->only('edit');
+        $this->middleware('can:admin.capacitaciones.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

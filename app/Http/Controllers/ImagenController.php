@@ -11,6 +11,13 @@ use function PHPUnit\Framework\isEmpty;
 
 class ImagenController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.imagenes.index')->only('index');
+        $this->middleware('can:admin.imagenes.create')->only('create');
+        $this->middleware('can:admin.imagenes.store')->only('store');
+        $this->middleware('can:admin.imagenes.edit')->only('edit');
+        $this->middleware('can:admin.imagenes.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

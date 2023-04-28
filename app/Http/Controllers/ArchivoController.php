@@ -6,9 +6,19 @@ use App\Models\Archivo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ArchivoController extends Controller
 {
+    public function __construct(){
+        /*
+        $this->middleware('can:admin.documentos.index')->only('index');
+        $this->middleware('can:admin.documentos.create')->only('create');
+        $this->middleware('can:admin.documentos.store')->only('store');
+        $this->middleware('can:admin.documentos.edit')->only('edit');
+        $this->middleware('can:admin.documentos.destroy')->only('destroy');
+        //$this->middleware('can:documentos')->only('buscar_doc');*/
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,12 +28,6 @@ class ArchivoController extends Controller
     {
         $Archivos = Archivo::all();
         return view('dashboard/documentos/index',compact('Archivos'));
-    }
-
-    public function mostrar()
-    {
-        $archivos=Archivo::all();
-        return view('/pagina_principal/documentos',compact('archivos') );
     }
 
     
@@ -97,6 +101,49 @@ class ArchivoController extends Controller
         return view('dashboard/documentos/edit',compact('archivo'));
     }
 
+    public function buscar_doc(Request $request){
+        $roll=Auth::user()->role;
+        $nom = '%'.$request->get('nombre').'%';
+        $dia = $request->get('dia');
+        $mes = $request->get('mes');
+        $año = $request->get('año');
+        if($dia==''){
+            $dia='DAY(fecha) > 0 AND DAY(fecha) < 32';
+        }else{
+            $dia='DAY(fecha) in('.$dia.')';
+        }
+        if($mes==''){
+            $mes='MONTH(fecha) > 0 AND MONTH(fecha) < 13';
+        }else{
+            $mes='MONTH(fecha) in('.$mes.')';
+        }
+        if($año==''){
+            $año='YEAR(fecha) > 1950 AND YEAR(fecha) < 2100';
+        }else{
+            $año='YEAR(fecha) in('.$año.')';
+        }
+        $archivos=[];
+        if($roll=='administrador'){
+            $categoria = $request->get('categoria');
+            if($categoria==''){
+                $categoria="categoria LIKE 'correspondencia' OR categoria LIKE 'archivo'";
+            }else{
+                $categoria="categoria LIKE '".$categoria."'";
+            }
+            $archivos=Archivo::where('name','LIKE',$nom)->whereRaw($dia)->whereRaw($mes)->whereRaw($año)->whereRaw($categoria)->where('estado','habilitado')->get();
+        }if($roll=='user_interno'){
+            $categoria = $request->get('categoria');
+            if($categoria==''){
+                $categoria="categoria LIKE 'correspondencia' OR categoria LIKE 'archivo'";
+            }else{
+                $categoria="categoria LIKE '".$categoria."'";
+            }
+            $archivos=Archivo::where('name','LIKE',$nom)->whereRaw($dia)->whereRaw($mes)->whereRaw($año)->whereRaw($categoria)->where('estado','habilitado')->get();
+        }if($roll=='user_externo'){
+            $archivos=Archivo::where('name','LIKE',$nom)->whereRaw($dia)->whereRaw($mes)->whereRaw($año)->where('categoria','archivo')->where('estado','habilitado')->get();
+        }
+        return view('/pagina_principal/documentos',compact('archivos'));
+    }
     /**
      * Update the specified resource in storage.
      *

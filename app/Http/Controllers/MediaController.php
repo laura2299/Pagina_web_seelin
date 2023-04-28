@@ -9,11 +9,20 @@ use Illuminate\Support\Collection;
 
 class MediaController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.archivosmedia.index')->only('index');
+        $this->middleware('can:admin.archivosmedia.create')->only('create');
+        $this->middleware('can:admin.archivosmedia.store')->only('store');
+        $this->middleware('can:admin.archivosmedia.edit')->only('edit');
+        $this->middleware('can:admin.archivosmedia.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
+
     public function index()
     {
         $medias=Media::all();

@@ -11,6 +11,13 @@ use PhpParser\Node\Stmt\If_;
 
 class ClienteController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.clientes.index')->only('index');
+        $this->middleware('can:admin.clientes.create')->only('create');
+        $this->middleware('can:admin.clientes.store')->only('store');
+        $this->middleware('can:admin.clientes.edit')->only('edit');
+        $this->middleware('can:admin.clientes.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

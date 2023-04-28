@@ -62,8 +62,10 @@
         <div class="row">
 			<div class="contact">
 				<h1>Inicio de Sesion</h1>
-				
-				<form method="POST" action="{{ route('login') }}">
+				@if($errors->any())
+					<h4>{{$errors->first()}}</h4>
+				@endif
+				<form method="POST" action="{{ route('inicia-usuario') }}">
 				@csrf
 					<div class="row mb-3">
 						<label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre:') }}</label>
