@@ -16,7 +16,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $medias=Media::all();
+        $medias=Media::orderBy('name', 'asc')->paginate(8);
         return view('dashboard/media/index',compact('medias') );
     }
 

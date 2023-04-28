@@ -15,9 +15,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Expositor</th>
+                        
                         <th>Titulo</th>
+                        <th>Expositor</th>
                         <th>Documento</th>
                         <th>Fecha</th>
                         <th>Estado</th>
@@ -28,9 +28,9 @@
                 <tbody>
                     @foreach ($capacitaciones as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
-                            <td>{{$item->expositor}}</td>
+                            
                             <td>{{$item->titulo}}</td>
+                            <td>{{$item->expositor}}</td>
                             <td>
                                 <a href="/{{$item->archivo}}">Ver</a>
                             </td>
@@ -55,6 +55,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $capacitaciones->links() !!}
         </div>
     </div>
     

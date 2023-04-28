@@ -15,7 +15,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                       
                         <th>Nombre</th>
                         <th>Estado</th>
                         <th>Media</th>
@@ -27,7 +27,7 @@
                 <tbody>
                     @foreach ($imagenes as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
+                           
                             <td>{{$item->name}}</td>
                             <td>{{$item->estado}}</td>
                             <td>{{$item->media->name}}</td>
@@ -50,6 +50,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $imagenes->links() !!}
         </div>
     </div>
     

@@ -30,7 +30,7 @@ Route::get('/w', function () {
 Route::get('/dash', function () {
     return view('dashboard/index');
 });
-=======
+
 Route::get('/dashboard', function () {
     return view('dashboard/index');
 })->name('admin.home');
@@ -46,7 +46,7 @@ Route::get('/clientes', function () {
 Route::get('/proyectos', function () {
     return view('pagina_principal/proyectos');
 })->name('proyectos');
->>>>>>> fdf72d0fd574365fd15a7e36100e8a0f3037f019
+
 Route::get('/contactanos', function () {
     return view('pagina_principal/contactanos');
 })->name('contactanos');

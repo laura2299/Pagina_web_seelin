@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Imagen;
 use App\Models\Media;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,7 @@ class ImagenController extends Controller
      */
     public function index()
     {
-        $imagenes= Imagen::all();
+        $imagenes= Imagen::orderBy('name', 'asc')->paginate(8);
         return view('dashboard/imagenes/index',compact('imagenes'));
     }
 
@@ -59,10 +60,13 @@ class ImagenController extends Controller
             'archivo.required' => 'Por favor, selecciona un archivo de imagen.',
             'archivo.mimes' => 'El archivo debe ser de tipo PNG o JPG.'
         ]);
-        $imagen->name =$request->file('archivo')->getClientOriginalName();
-       
+        $fecha=Carbon::now();
+            $fecha_string = date_format($fecha, 'Y-m-d');
+            $nombre=$fecha_string.$request->file('archivo')->getClientOriginalName();
+        $imagen->name =$nombre;
+        
             $path1 = $request->file('archivo')->storeAs(
-                'public/files/img', $request->file('archivo')->getClientOriginalName()
+                'public/files/img', $nombre
             );
 
         $array = explode('public',$path1);
@@ -114,20 +118,28 @@ class ImagenController extends Controller
     {   
         
         $request->validate([
-            'archivo'=>'sometimes|mimes:png,jpg',
+            'file'=>'sometimes|mimes:png,jpg',
             'estado'=>'required'
             
         ], [
             
-            'archivo.mimes' => 'El archivo debe ser de tipo PNG o JPG.'
+            'file.mimes' => 'El archivo debe ser de tipo PNG o JPG.'
         ]);
-        $img=$request->file('archivo');
-        if (!isEmpty($img)) {
+        $imge=$request->file('file');
+        if (!empty($imge)) {
+            
             $imagen=Imagen::findOrFail($id);
-            $imagen->name =$request->file('archivo')->getClientOriginalName();
+            $array = explode('storage',$imagen->archivo);
+            $arch = 'public'.$array[1];
+            Storage::delete($arch);
+            $fecha=Carbon::now();
+            $fecha_string = date_format($fecha, 'Y-m-d');
+            $nombre=$fecha_string.$request->file('file')->getClientOriginalName();
 
-         $path1 = $request->file('archivo')->storeAs(
-                'public/files/img', $request->file('archivo')->getClientOriginalName()
+            $imagen->name =$nombre;
+
+         $path1 = $request->file('file')->storeAs(
+                'public/files/img', $nombre
             );
 
         $array = explode('public',$path1);
@@ -157,8 +169,12 @@ class ImagenController extends Controller
      */
     public function destroy($id)
     {
-        Imagen::destroy($id);
         
+        $img=Imagen::findOrFail($id);
+        $array = explode('storage',$img->archivo);
+        $arch = 'public'.$array[1];
+        Storage::delete($arch);
+        Imagen::destroy($id);
         return redirect()->route('admin.imagenes.index')->with('mensaje', 'El registro ha sido eliminado correctamente');
 
     }
