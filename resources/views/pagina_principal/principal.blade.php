@@ -16,7 +16,8 @@
             @if ($item->name!='galeria')
                 @for ($i = 0; $i < sizeof($imagenes); $i++)
                     @if ($imagenes[$i]!='[]')
-                        @if ($imagenes[$i][0]->id_media == $item->id)
+
+                        @if ($imagenes[$i][0]->estado == 'habilitado' && $imagenes[$i][0]->id_media == $item->id)
                             <div class="carousel-item active" data-bs-interval="2000" >
                                 <img src="{{$imagenes[$i][0]->archivo}}" id="slide" class="d-block w-100 " alt="{{$imagenes[$i][0]->name}}" height="500em">
                             </div>
@@ -58,7 +59,7 @@
         @if ($item->name=='galeria')
             @for ($i = 0; $i < sizeof($imagenes); $i++)
                 @if ($imagenes[$i]!='[]')
-                    @if ($imagenes[$i][0]->id_media == $item->id)
+                    @if ($imagenes[$i][0]->estado == 'habilitado' && $imagenes[$i][0]->id_media == $item->id)
                         @for ($j = 0; $j < sizeof($imagenes[$i]); $j++)
                             <div class="col img_p">
                                 <img src="{{$imagenes[$i][$j]->archivo}}" class=" conborde " alt="{{$imagenes[$i][$j]->name}}" >

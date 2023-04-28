@@ -230,17 +230,15 @@
             </div>
             <div id="sesion">
                 <div class="icono" id="mnc">
-                    <!--
-                    <form action="{{ route('finaliza-cliente') }}" method="get">
-                        <button type="submit" class="btn_oculto"></button>
-                    </form>-->
+                    
                     <?php $id = session_id();echo $id;?>
-                    <a href="{{ route('finaliza-cliente') }}">Cerrar Sesion</a>
-                    @if (session('status'))
+                    
+                    <a href="{{ route('logout_u') }}">Cerrar Sesion</a>
+                    
                     <a href="{{ route('cambio_contraseña') }}">Configuración</a>
                     <a href="{{ route('documentos') }}">Documentos</a>
-                    @endif
-                    <a href="{{ route('inicio_sesion') }}">Inicio Sesion</a>
+                    
+                    <a href="{{ route('login') }}">Inicio Sesion</a>
                 </div>  
                 <a href="javascript:void(0);" class="iconito" onclick="miFun2()"><ion-icon name="person-circle-outline"></ion-icon></a>
                 

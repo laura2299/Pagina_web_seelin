@@ -46,13 +46,10 @@ Route::get('/clientes', function () {
 Route::get('/proyectos', function () {
     return view('pagina_principal/proyectos');
 })->name('proyectos');
-
 Route::get('/contactanos', function () {
     return view('pagina_principal/contactanos');
 })->name('contactanos');
-Route::get('/inicio_sesion', function () {
-    return view('pagina_principal/inicio_sesion');
-})->name('inicio_sesion');
+
 
 Route::get('/cambio_contraseña', function () {
     return view('pagina_principal/cambio_contraseña');
@@ -60,8 +57,12 @@ Route::get('/cambio_contraseña', function () {
 
 Route::get('/documentos', function () {
     return view('pagina_principal/documentos');
-})->middleware('auth')->name('documentos');
+})->name('documentos');
 /*
+Route::get('/inicio_sesion', function () {
+    return view('pagina_principal/inicio_sesion');
+})->name('inicio_sesion');
+
 Route::get('/capacitaciones' , function () {
     return view('pagina_principal/capacitaciones');
 })->name('capacitaciones');
@@ -84,13 +85,12 @@ Route::get('/clientes', function () {
     return view('pagina_principal/clientes');
 })->name('clientes');
 */
-
+/*
 Route::controller(LoginController::class)->group(function() {
     Route::post('/inicia-cliente','login_cliente')->name('inicia-cliente');
     Route::get('/finaliza-cliente','logout_cliente')->name('finaliza-cliente');
-
 });
-
+*/
 
 Route::controller(MediaController::class)->group(function () {
     Route::get('/quienes_somos' , 'mostrar_qs' )->name('quienes_somos');
@@ -113,6 +113,10 @@ Route::controller(ArchivoController::class)->group(function () {
 
 
 Auth::routes();
+
+Route::controller(LoginController::class)->group(function() {
+    Route::get('/logout_u','logout_u')->name('logout_u');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

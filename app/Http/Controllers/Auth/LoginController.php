@@ -74,25 +74,25 @@ class LoginController extends Controller
 
         $mess="Sesion finalizada";
         return view('/pagina_principal/inicio_sesion',compact('mess'));
-    }
-    public function login(REquest $request){
+    }*/
+    public function login(Request $request){
         $credentiales = [
             "name" => $request->name,
             "password" => $request->password,
         ];
-
+        $mess="Sesion iniciada";
         return view('/pagina_principal/documentos',compact('mess'));
     }
 
-    public function logout(Request $request){
+    public function logout_u(Request $request){
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        return view('/dashboard/index');
+        $mess="Sesion finalizada";
+        return view('/pagina_principal/inicio_sesion',compact('mess'));
     }
-    */
+    
     use AuthenticatesUsers;
 
     /**
@@ -109,6 +109,6 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 }

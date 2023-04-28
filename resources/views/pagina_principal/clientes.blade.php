@@ -165,7 +165,7 @@
                 @if ($item->estado == 'Habilitado' )
                     <div class="col-3 cliente_box">
                         <div class="boton-m">
-                            <img src="img/logo_cliente/{{$item->logo}}" onerror="this.onerror=null;this.src='img/logo_cliente/logoSeelin.png';" alt="Imagen" id="img_{{$item->nombre}}" > 
+                            <img src="{{$item->logo}}" onerror="this.onerror=null;this.src='img/logo_cliente/logoSeelin.png';" alt="Imagen" id="img_{{$item->nombre}}" > 
                             <h4>{{$item->nombre}}</h4>
                             <label for="btn-m" id="{{$item->nombre}}" class="boton_e" onclick="lista_Exp(this.id,{{$item->id}})">
                                 Ver Trabajos

@@ -27,8 +27,6 @@ class TrabajoController extends Controller
     public function create()
     {
 
-        
-
         $cliente = Cliente::all()->pluck('nombre','id');
         return view('dashboard/experiencias/create',compact('cliente'));
 
@@ -83,9 +81,11 @@ class TrabajoController extends Controller
     public function edit($id)
     {
 
+
         $trabajo=Trabajo::findOrFail($id);
         $cliente =Cliente::all()->pluck('nombre','id');
         return view('dashboard/experiencias/edit',compact('trabajo','cliente'));
+
 
     }
 

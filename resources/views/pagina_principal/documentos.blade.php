@@ -76,14 +76,13 @@
 						<input type="date" name="fecha" id="fecha">
 					</label>
 					<label for="buscar">
-						<a href="{{ route('documentos_res') }}" id="btn_busc">Buscar</a>
-						
+						<a href="{{ route('documentos_res') }}" id="btn_busc">Buscar</a>	
 					</label>
 				</form>
 			</div>
 		<br>
 		@isset($archivos)
-		<table class="table table-striped table-hover">
+		<table class="table table-striped table-hover" style="margin:30px;width:90%;">
 			<thead>
 				<tr>
 				<th scope="col">#</th>
@@ -92,7 +91,6 @@
 				<th scope="col"></th>
 				<th scope="col"></th>
 				<th scope="col">Fecha</th>
-				<th scope="col">Tamaño</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -103,9 +101,8 @@
 						<td>{{$item->name}}</td>
 						<td>{{$item->categoria}}</td>
 						<td><a href="{{$item->path}}" target="_blank"><ion-icon name="open-outline"></ion-icon></a></td>
-						<td><a href="#" target="_blank"><ion-icon name="download-outline"></ion-icon></a></td>
+						<td><a href="{{$item->path}}" download="{{$item->name}}"><ion-icon name="download-outline"></ion-icon></a></td>
 						<td>{{$item->fecha}}</td>
-						<td></td>
 					</tr>
 					<?php $c=$c+1;?>
 				@endforeach 

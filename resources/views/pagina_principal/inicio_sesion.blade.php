@@ -27,7 +27,7 @@
 			height:200px;
 			flex-direction:column;
 			justify-content: center;
-		}
+		}/*
 		.contact form label{
 			width:80%;
 			display:flex;
@@ -44,7 +44,7 @@
 			border-radius:8px;
 			padding: 5px;
 		}
-
+*/
 		#btn_ing{
 			max-width: 500px;
 			width:100%;
@@ -63,20 +63,46 @@
 			<div class="contact">
 				<h1>Inicio de Sesion</h1>
 				
-				<form method="POST" action="{{route('inicia-cliente')}}">
+				<form method="POST" action="{{ route('login') }}">
 				@csrf
-					<label for="name">
-						<span>Usuario:</span>
-						<input type="text" name="name" id="name">
-					</label>
-					<label for="password">
-						
-						<span>Contraseña:</span>
-						<input type="password" name="password" id="password">
-						
-					</label>
+					<div class="row mb-3">
+						<label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre:') }}</label>
+						<div class="col-md-6">
+							<input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+							@error('name')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password:') }}</label>
+
+						<div class="col-md-6">
+							<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+							@error('password')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
+						</div>
+					</div>
 					<button type="submit" class="btn btn-primary">Ingresar</button>
-					<!--<input id="btn_ing" type="button" value="Ingresar">-->
+					<!--
+						<div class="row mb-0">
+						<div class="col-md-8 offset-md-4">
+							<button type="submit" class="btn btn-primary">
+								{{ __('Ingresar') }}
+							</button>
+						</div>
+					</div>
+						<input id="btn_ing" type="button" value="Ingresar">-->
+
+					
 				</form>
 			</div>
         </div>

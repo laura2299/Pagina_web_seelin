@@ -48,21 +48,21 @@ class MediaController extends Controller
 
     public function mostrar_proyectos()
     {
-        $medias=Media::where('categoria','proyectos')->get();
+        $medias=Media::where('categoria','proyectos')->where('estado','habilitado')->get();
         $imagenes=[];
         $n = sizeof($medias);
         for ($i=0; $i < $n; $i++) { 
-            array_push($imagenes,Imagen::where('id_media',$medias[$i]->id)->get());
+            array_push($imagenes,Imagen::where('id_media',$medias[$i]->id)->where('estado','habilitado')->get());
         }
         return view('/pagina_principal/proyectos',compact('medias','imagenes') );
     }
     public function mostrar_principal()
     {
-        $medias=Media::where('categoria','principal')->get();
+        $medias=Media::where('categoria','inicio')->where('estado','habilitado')->get();
         $imagenes=[];
         $n = sizeof($medias);
         for ($i=0; $i < $n; $i++) { 
-            array_push($imagenes,Imagen::where('id_media',$medias[$i]->id)->get());
+            array_push($imagenes,Imagen::where('id_media',$medias[$i]->id)->where('estado','habilitado')->get());
         }
         return view('/pagina_principal/principal',compact('medias','imagenes') );
     }
