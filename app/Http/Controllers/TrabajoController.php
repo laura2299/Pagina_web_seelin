@@ -22,7 +22,7 @@ class TrabajoController extends Controller
      */
     public function index()
     {
-        $experiencias=Trabajo::all();
+        $experiencias=Trabajo::orderBy('actividad', 'asc')->paginate(8);
         return view('dashboard/experiencias/index',compact('experiencias'));
     }
 
@@ -33,8 +33,10 @@ class TrabajoController extends Controller
      */
     public function create()
     {
+
         $cliente = Cliente::all()->pluck('nombre','id');
         return view('dashboard/experiencias/create',compact('cliente'));
+
     }
 
     /**
@@ -44,6 +46,7 @@ class TrabajoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {   
         $request->validate([
             'actividad'=>'required',
@@ -61,6 +64,7 @@ class TrabajoController extends Controller
         $trabajo->id_cliente = $request->id_cliente;
         $trabajo->save();
         
+
         return redirect()->route('admin.experiencias.index');
     }
 
@@ -83,9 +87,13 @@ class TrabajoController extends Controller
      */
     public function edit($id)
     {
+
+
         $trabajo=Trabajo::findOrFail($id);
         $cliente =Cliente::all()->pluck('nombre','id');
         return view('dashboard/experiencias/edit',compact('trabajo','cliente'));
+
+
     }
 
     /**
@@ -97,6 +105,7 @@ class TrabajoController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'actividad'=>'required',
             'fecha'=>'required',
@@ -113,6 +122,7 @@ class TrabajoController extends Controller
         $trabajo->id_cliente = $request->id_cliente;
         $trabajo->save();
         
+
         return redirect()->route('admin.experiencias.index');
     }
 

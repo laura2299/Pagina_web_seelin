@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Capacitacion;
 use App\Models\Archivo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CapacitacionController extends Controller
 {   
@@ -22,7 +24,7 @@ class CapacitacionController extends Controller
      */
     public function index()
     {
-        $capacitaciones = Capacitacion::all();
+        $capacitaciones = Capacitacion::orderBy('titulo', 'asc')->paginate(8);
         return view('dashboard/capacitaciones/index',compact('capacitaciones'));
     }
 
@@ -62,8 +64,12 @@ class CapacitacionController extends Controller
         $capacitacion->fecha=$request->fecha;
         $capacitacion->estado=$request->estado;
 
+        $fecha=Carbon::now();
+        $fecha_string = date_format($fecha, 'Y-m-d');
+        $nombre=$fecha_string.$request->file('archivo')->getClientOriginalName();
+
             $path1 = $request->file('archivo')->storeAs(
-            'public/files', $request->file('archivo')->getClientOriginalName()
+            'public/files', $nombre
             );
 
         $array = explode('public',$path1);
@@ -127,8 +133,17 @@ class CapacitacionController extends Controller
             $Capacitacion->titulo = $request->titulo;
             $Capacitacion->fecha=$request->fecha;
             $Capacitacion->estado=$request->estado;
+            
+            
+        $array = explode('storage',$Capacitacion->archivo);
+        $arch = 'public'.$array[1];
+        Storage::delete($arch);
+            
+            $fecha=Carbon::now();
+            $fecha_string = date_format($fecha, 'Y-m-d');
+            $nombre=$fecha_string.$request->file('archivo')->getClientOriginalName();
             $path1 = $request->file('archivo')->storeAs(
-                'public/files', $request->file('archivo')->getClientOriginalName()
+                'public/files', $nombre
                 );
     
             $array = explode('public',$path1);
@@ -156,8 +171,12 @@ class CapacitacionController extends Controller
      */
     public function destroy($id)
     {
-        Capacitacion::destroy($id);
         
+        $Capacitacion=Capacitacion::findOrFail($id);
+        $array = explode('storage',$Capacitacion->archivo);
+        $arch = 'public'.$array[1];
+        Storage::delete($arch);
+        Capacitacion::destroy($id);
         return redirect()->route('admin.capacitaciones.index')->with('mensaje', 'El registro ha sido eliminado correctamente');
     }
 }

@@ -16,7 +16,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Logo</th>
                         <th>Estado</th>
@@ -27,7 +27,7 @@
                 <tbody>
                     @foreach ($clientes as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
+                            
                             <td>{{$item->nombre}}</td>
                             @if(empty($item->logo))
                             <td><a href="/img/sinlogo.png">Ver</a></td>
@@ -61,6 +61,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $clientes->links() !!}
         </div>
     </div>
     

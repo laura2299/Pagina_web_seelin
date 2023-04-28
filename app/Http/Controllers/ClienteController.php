@@ -6,6 +6,8 @@ use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Models\Trabajo;
 use App\Models\Media;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Stmt\If_;
 
@@ -25,7 +27,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes=Cliente::all();
+        $clientes=Cliente::orderBy('nombre', 'asc')->paginate(8);
         return view('dashboard/clientes/index',compact('clientes') );
     } 
 
@@ -72,8 +74,16 @@ class ClienteController extends Controller
             $cliente1 = new Cliente();
             $cliente1->nombre =$request->nombre;
             
+            //guardamos el nombre con la fecha
+
+            
+            
+            $fecha=Carbon::now();
+            $fecha_string = date_format($fecha, 'Y-m-d');
+            $nombre=$fecha_string.$request->file('logo')->getClientOriginalName();
+
             $path1 = $request->file('logo')->storeAs(
-                'public/files/logoCliente', $request->file('logo')->getClientOriginalName()
+                'public/files/logoCliente',$nombre
             );
 
         $array = explode('public',$path1);
@@ -144,14 +154,30 @@ class ClienteController extends Controller
 
             $cliente1=Cliente::findOrFail($id);
             $cliente1->nombre =$request->nombre;
+
+            //borramos el archivo que antes habia si no era null
+            if ($cliente1->logo != null) {
+                $array = explode('storage',$cliente1->logo);
+                $arch = 'public'.$array[1];
+                Storage::delete($arch);
+            
+            
+            }
+            else {
+            $fecha=Carbon::now();
+            $fecha_string = date_format($fecha, 'Y-m-d');
+            $nombre=$fecha_string.$request->file('logo')->getClientOriginalName();
             $path1 = $request->file('logo')->storeAs(
-                'public/files/logoCliente', $request->file('logo')->getClientOriginalName()
+                'public/files/logoCliente', $nombre
             );
 
-        $array = explode('public',$path1);
-        
+            $array = explode('public',$path1);
+            $cliente1->logo = 'storage'.$array[1];
             $cliente1->estado= $request->estado;
             $cliente1->save();
+
+            }
+            
 
            
         }
@@ -176,8 +202,12 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        Cliente::destroy($id);
         
+        $cliente=Cliente::findOrFail($id);
+        $array = explode('storage',$cliente->logo);
+        $arch = 'public'.$array[1];
+        Storage::delete($arch);
+        Cliente::destroy($id);
         return redirect()->route('admin.clientes.index')->with('mensaje', 'El registro ha sido eliminado correctamente');
     }
 }

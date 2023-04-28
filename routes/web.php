@@ -27,8 +27,9 @@ Route::get('/w', function () {
 
 
 
-
-/*
+Route::get('/dash', function () {
+    return view('dashboard/index');
+});
 Route::get('/dashboard', function () {
     return view('dashboard/index');
 })->name('admin.home');

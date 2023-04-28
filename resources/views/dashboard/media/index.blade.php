@@ -18,7 +18,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Descripcion</th>
                         <th>Categoria</th>
@@ -30,7 +30,7 @@
                 <tbody>
                     @foreach ($medias as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
+                            
                             <td>{{$item->name}}</td>
                             <td>{{$item->descripcion}}</td>
                             <td>{{$item->categoria}}</td>
@@ -51,6 +51,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $medias->links() !!}
         </div>
     </div>
     

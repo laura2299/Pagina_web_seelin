@@ -15,7 +15,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        
                         <th>Actividad</th>
                         <th>Fecha Inicio</th>
                         <th>Categoria</th>
@@ -28,7 +28,7 @@
                 <tbody>
                     @foreach ($experiencias as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
+                            
                             <td>{{$item->actividad}}</td>
                             <td>{{$item->fecha_inicio}}</td>
                             <td>{{$item->categoria}}</td>
@@ -53,6 +53,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $experiencias->links() !!}
         </div>
     </div>
     

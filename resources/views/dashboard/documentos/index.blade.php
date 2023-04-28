@@ -7,6 +7,20 @@
     {{ session('mensaje') }}
 </div>
 @endif
+    <div>
+        <form method="GET" action="{{ route('admin.documentos.index') }}">
+            <div class="input-group mb-3">
+                <input  
+                type="text" name="search" placeholder="Buscar por nombre" style=" outline: none;">
+                
+                    <button class="btn btn-outline-primary" type="submit">Buscar </button>
+
+                
+     
+            </div>
+         </form>  
+
+    </div>
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary" href="{{route('admin.documentos.create')}}">Nuevo</a>
@@ -57,6 +71,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $Archivos->links() !!}
         </div>
     </div>
     

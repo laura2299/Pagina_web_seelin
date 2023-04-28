@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Archivo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,9 +25,16 @@ class ArchivoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Archivos = Archivo::all();
+        $busqueda = $request->input('search');
+
+    $Archivos = DB::table('archivos')
+        ->orderBy('name', 'asc')
+        ->where('name', 'like', '%'.$busqueda.'%')
+        ->paginate(8);
+
+        
         return view('dashboard/documentos/index',compact('Archivos'));
     }
 
@@ -60,10 +68,12 @@ class ArchivoController extends Controller
         ]);
         
         $miarchivo = new Archivo();
-        
-        $miarchivo->name = $request->file('archivo')->getClientOriginalName();
+        $fecha=Carbon::now();
+        $fecha_string = date_format($fecha, 'Y-m-d');
+        $nombre=$fecha_string.$request->file('archivo')->getClientOriginalName();
+        $miarchivo->name = $fecha_string.$request->file('archivo')->getClientOriginalName();
             $path1 = $request->file('archivo')->storeAs(
-                'public/files', $request->file('archivo')->getClientOriginalName()
+                'public/files', $nombre
             );
 
         $array = explode('public',$path1);
@@ -165,10 +175,19 @@ class ArchivoController extends Controller
         if (!empty($documento)) {
             #guardamos en storage
             $miarchivo=Archivo::findOrFail($id);
+            
+            $array = explode('storage',$miarchivo->path);
+        
+            $arch = 'public'.$array[1];
+            Storage::delete($arch);
 
-            $miarchivo->name = $request->file('archivo')->getClientOriginalName();
+            $fecha=Carbon::now();
+        $fecha_string = date_format($fecha, 'Y-m-d');
+        $nombre=$fecha_string.$request->file('archivo')->getClientOriginalName();
+
+            $miarchivo->name = $fecha_string.$request->file('archivo')->getClientOriginalName();
             $path1 = $request->file('archivo')->storeAs(
-                'public/files', $request->file('archivo')->getClientOriginalName()
+                'public/files', $nombre
             );
 
         $array = explode('public',$path1);
@@ -201,7 +220,10 @@ class ArchivoController extends Controller
      */
     public function destroy($id)
     {   $miarchivo=Archivo::findOrFail($id);
-        Storage::delete('leidyPatzi_exa272(1).pdf');
+        $array = explode('storage',$miarchivo->path);
+        
+        $arch = 'public'.$array[1];
+        Storage::delete($arch);
         Archivo::destroy($id);
         
         return redirect()->route('admin.documentos.index')->with('mensaje', 'El registro ha sido eliminado correctamente');

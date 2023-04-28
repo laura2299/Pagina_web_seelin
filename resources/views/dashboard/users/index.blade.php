@@ -15,7 +15,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Usuario</th>
@@ -28,7 +28,7 @@
                 <tbody>
                     @foreach ($users as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
+                           
                             <td>{{$item->name}}</td>
                             <td>{{$item->lastName}}</td>
                             <td>{{$item->usuario}}</td>
@@ -48,6 +48,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $users->links() !!}
         </div>
     </div>
     

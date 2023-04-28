@@ -8,9 +8,9 @@
             
             @csrf
                 <div class="form-group">
-                {!! Form::label('archivo', 'archivo') !!}
-                {!! Form::file('archivo',null, array('required' => 'true'),['class'=>'form-control'])!!}
-                @error('archivo')
+                {!! Form::label('file', 'Añade tu imagen: ') !!}
+                {!! Form::file('file',null, array('required' => 'true'),['class'=>'form-control'])!!}
+                @error('file')
                 <small class="text-danger">{{$message}}</small>
                 @enderror
             </div>
