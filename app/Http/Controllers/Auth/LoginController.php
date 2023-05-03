@@ -35,46 +35,70 @@ class LoginController extends Controller
         return redirect(route('inicio_session'));
     }
     */
-    /*
-    public function login_cliente(Request $request){
+    
+    public function login_usuario(Request $request){
         $credentiales = [
-            "name" => $request->name,
+            "usuario" => $request->name,
             "password" => $request->password,
-            "roll" => "c1",
+            "role" => "administrador",
         ];
-
-        $credentiales1 = [
-            "name" => $request->name,
-            "password" => $request->password,
-            "roll" => "admin",
-        ];
-        //echo $credentiales;
-        //$user->Auth::user();
-        
         if(Auth::attempt($credentiales)){
             $request->session()->regenerate();
-            $mess="Sesion Iniciada";
-            return view('/pagina_principal/documentos',compact('mess'));
+            return redirect(route('principal'));
+        }else{
+            $credentiales1 = [
+                "usuario" => $request->name,
+                "password" => $request->password,
+                "role" => "user_interno",
+            ];
+            if(Auth::attempt($credentiales1)){
+                $request->session()->regenerate();
+                $mess="Sesion Iniciada Usuario Interno";
+                //return view('/pagina_principal/documentos',compact('mess'));
+                return redirect()->route('documentos');
+            }else{
+                $credentiales2 = [
+                    "usuario" => $request->name,
+                    "password" => $request->password,
+                    "role" => "user_externo                    ",
+                ];
+                if(Auth::attempt($credentiales2)){
+                    $request->session()->regenerate();
+                    $mess="Sesion Iniciada Usuario Externo";
+                    //return view('/pagina_principal/documentos',compact('mess'));
+                    return redirect()->route('documentos');
+                }else{
+                    $mess="Datos incorrectos";
+                    //return view('/pagina_principal/inicio_sesion',compact('mess'));
+                    return redirect()->route('inicio_sesion')->withErrors(['mesg' => $mess]);
+                }
+            }
         }
-        if(Auth::attempt($credentiales1)){
-            $request->session()->regenerate();
-            return view('dashboard/index');
-        }
-        else{
-            $mess="Datos incorrectos";
-            return view('/pagina_principal/inicio_sesion',compact('mess'));
-        }
+        
     }
 
-    public function logout_cliente(Request $request){
+    public function logout_usuario(Request $request){
+        if(Auth::check()){
+            $user = Auth::user();
+            //Busca todos los token del usuario en la base de datos y los eliminamos;
+            $user->tokens->each(function($token){
+            $token->delete();
+            });
+            $mess="Sesion finalizada";
+            Auth::logout();
+            return view('/pagina_principal/inicio_sesion',compact('mess'));
+        }
+        
+        /*
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         $mess="Sesion finalizada";
-        return view('/pagina_principal/inicio_sesion',compact('mess'));
-    }*/
+        return view('/pagina_principal/inicio_sesion',compact('mess'));*/
+    }
+    /*
     public function login(Request $request){
         $credentiales = [
             "name" => $request->name,
@@ -92,7 +116,7 @@ class LoginController extends Controller
         $mess="Sesion finalizada";
         return view('/pagina_principal/inicio_sesion',compact('mess'));
     }
-    
+    */
     use AuthenticatesUsers;
 
     /**

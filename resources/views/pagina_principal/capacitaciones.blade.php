@@ -36,7 +36,7 @@
                 <h5>{{$item->expositor}}</h5>
                 <div class="part_abajo">
                     <p>{{$item->fecha}}</p>
-                    <a class="btn_left" href="#" target="_blank">Saber Mas</a>
+                    <a class="btn_left" href="{{$item->archivo}}" target="_blank">Saber Mas</a>
                 </div>
             </div>
         @endforeach     

@@ -27,7 +27,7 @@
     }
     .img_c img{
         min-height:200px;
-        max-width: 400px;
+        max-width: 500px;
         max-height: 250px;
     }
     .c_text{

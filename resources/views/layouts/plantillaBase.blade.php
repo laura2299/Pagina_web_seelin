@@ -47,14 +47,14 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <small class="bg-red">Online</small>
-                  <span class="hidden-xs">SEELIN</span>
+                  <span class="hidden-xs">@can('cambio_contraseña'){{auth()->user()->name}}@endcan</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     
                     <p>
-                      Pagina Web Seelin  
+                      Administrador Seelin, donde se pueden realizar todas las modificaciones 
                     </p>
                   </li>
                   
@@ -62,7 +62,7 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Cerrar</a>
+                      <a href="{{ route('finaliza-usuario') }}" class="btn btn-default btn-flat">Cerrar Sesion</a>
                     </div>
                   </li>
                 </ul>
@@ -112,7 +112,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{route('admin.users.index')}}"><i class="fa fa-circle-o"></i> Usuarios</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Cambiar Contraseña</a></li>
+                <li><a href="{{ route('cambio_contraseña') }}"><i class="fa fa-circle-o"></i> Cambiar Contraseña</a></li>
               </ul>
             </li>
             

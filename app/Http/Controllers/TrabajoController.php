@@ -8,6 +8,13 @@ use App\Models\Cliente;
 
 class TrabajoController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.experiencias.index')->only('index');
+        $this->middleware('can:admin.experiencias.create')->only('create');
+        $this->middleware('can:admin.experiencias.store')->only('store');
+        $this->middleware('can:admin.experiencias.edit')->only('edit');
+        $this->middleware('can:admin.experiencias.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

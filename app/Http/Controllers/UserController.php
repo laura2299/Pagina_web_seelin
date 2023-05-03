@@ -28,6 +28,15 @@ class UserController extends Controller
         return view('dashboard/users/create');
     }
 
+    public function cambio_contra(Request $request){
+        $id = auth()->user()->id;
+        $miusuario=User::findOrFail($id);
+        $pass=Hash::make($request['nueva_contraseña']);
+        $miusuario->password=$pass;
+        $miusuario->save();
+        $mess="Contraseña Cambiada";
+        return view('/pagina_principal/cambio_contraseña',compact('mess'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -42,7 +51,7 @@ class UserController extends Controller
             'password'=> 'required|min:8',
             'tipo'=>'required'
         ],
-    );
+        );
         $usuario=$request->only('nombre','lastname','usuario','password','tipo');
         $usuario['password']=Hash::make($request['password']);
         $user= new User();
