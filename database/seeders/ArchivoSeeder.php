@@ -14,6 +14,6 @@ class ArchivoSeeder extends Seeder
      */
     public function run()
     {
-        Archivo::factory(20)->create();
+       
     }
 }

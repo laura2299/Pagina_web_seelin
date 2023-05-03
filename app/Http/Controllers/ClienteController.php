@@ -95,8 +95,7 @@ class ClienteController extends Controller
             $cliente->save();
         }
         
-        $clientes=Cliente::all();
-        return view('dashboard/clientes/index',compact('clientes'));
+        return redirect()->route('admin.clientes.index');
     }
 
     /**
@@ -183,8 +182,7 @@ class ClienteController extends Controller
         }
     
         
-        $clientes=Cliente::all();
-        return view('dashboard/clientes/index',compact('clientes'));
+        return redirect()->route('admin.clientes.index');
     }
 
     /**

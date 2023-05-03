@@ -78,8 +78,8 @@ class ImagenController extends Controller
         $imagen->estado= $request->estado;
         $imagen->id_media= $request->id_media;
         $imagen->save();
-        $imagenes= Imagen::all();
-        return view('dashboard/imagenes/index',compact('imagenes'));
+        
+        return redirect()->route('admin.imagenes.index');
     }
 
     /**
@@ -157,8 +157,7 @@ class ImagenController extends Controller
         $imagen2->save();
         }
         
-        $imagenes= Imagen::all();
-        return view('dashboard/imagenes/index',compact('imagenes'));
+        return redirect()->route('admin.imagenes.index');
     }
 
     /**
