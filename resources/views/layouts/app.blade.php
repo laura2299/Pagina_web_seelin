@@ -232,9 +232,6 @@
 
                 <div class="icono" id="mnc">
                     
-                    <?php $id = session_id();echo $id;?>
-                    
-                    
                     @can('cambio_contraseña')
                     <a href="{{ route('finaliza-usuario') }}">Cerrar Sesion</a>
                     <a href="{{ route('cambio_contraseña') }}">Configuración</a>
@@ -242,7 +239,9 @@
                     @can('documentos')
                     <a href="{{ route('documentos') }}">Documentos</a>
                     @endcan
-
+                    @can('admin.home')
+                    <a href="{{ route('/dash') }}">Administrador</a>
+                    @endcan
                     <a href="{{ route('inicio_sesion') }}">Inicio Sesion</a>
                 </div>
                 @can('cambio_contraseña')

@@ -26,15 +26,15 @@ Route::get('/w', function () {
 */
 
 
-
+/*
 Route::get('/dash', function () {
     return view('dashboard/index');
 });
+*/
 Route::get('/dashboard', function () {
     return view('dashboard/index');
 })->name('admin.home');
 
-*/
 
 Route::get('/servicios', function () {
     return view('pagina_principal/servicios');

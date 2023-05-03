@@ -29,6 +29,11 @@ class UserController extends Controller
     }
 
     public function cambio_contra(Request $request){
+        $id = auth()->user()->id;
+        $miusuario=User::findOrFail($id);
+        $pass=Hash::make($request['nueva_contraseña']);
+        $miusuario->password=$pass;
+        $miusuario->save();
         $mess="Contraseña Cambiada";
         return view('/pagina_principal/cambio_contraseña',compact('mess'));
     }

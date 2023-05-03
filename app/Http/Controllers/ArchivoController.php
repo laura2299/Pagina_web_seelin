@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Auth;
 class ArchivoController extends Controller
 {
     public function __construct(){
-        /*
+        
         $this->middleware('can:admin.documentos.index')->only('index');
         $this->middleware('can:admin.documentos.create')->only('create');
         $this->middleware('can:admin.documentos.store')->only('store');
         $this->middleware('can:admin.documentos.edit')->only('edit');
         $this->middleware('can:admin.documentos.destroy')->only('destroy');
-        //$this->middleware('can:documentos')->only('buscar_doc');*/
+        $this->middleware('can:documentos')->only('buscar_doc');
     }
     /**
      * Display a listing of the resource.
@@ -136,7 +136,7 @@ class ArchivoController extends Controller
         if($roll=='administrador'){
             $categoria = $request->get('categoria');
             if($categoria==''){
-                $categoria="categoria LIKE 'correspondencia' OR categoria LIKE 'archivo'";
+                $categoria="(categoria LIKE 'correspondencia' OR categoria LIKE 'archivo')";
             }else{
                 $categoria="categoria LIKE '".$categoria."'";
             }
@@ -144,7 +144,7 @@ class ArchivoController extends Controller
         }if($roll=='user_interno'){
             $categoria = $request->get('categoria');
             if($categoria==''){
-                $categoria="categoria LIKE 'correspondencia' OR categoria LIKE 'archivo'";
+                $categoria="(categoria LIKE 'correspondencia' OR categoria LIKE 'archivo')";
             }else{
                 $categoria="categoria LIKE '".$categoria."'";
             }

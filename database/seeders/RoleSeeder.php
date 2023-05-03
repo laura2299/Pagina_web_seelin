@@ -64,6 +64,12 @@ class RoleSeeder extends Seeder
         $permission28 = Permission::create(['name' => 'admin.clientes.edit'])->assignRole($role1);
         $permission29 = Permission::create(['name' => 'admin.clientes.destroy'])->assignRole($role1);
 
+        /*$permission39 = Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+        $permission40 = Permission::create(['name' => 'admin.users.create'])->assignRole($role1);
+        $permission41 = Permission::create(['name' => 'admin.users.store'])->assignRole($role1);
+        $permission42 = Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+        $permission43 = Permission::create(['name' => 'admin.users.destroy'])->assignRole($role1);*/
+
         $permission30 = Permission::create(['name' => 'documentos'])->syncRoles([$role1,$role2,$role3]);
         $permission31 = Permission::create(['name' => 'cambio_contraseña'])->syncRoles([$role1,$role2,$role3]);
     }

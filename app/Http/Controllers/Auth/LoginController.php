@@ -60,9 +60,9 @@ class LoginController extends Controller
                 $credentiales2 = [
                     "usuario" => $request->name,
                     "password" => $request->password,
-                    "role" => "user_externo",
+                    "role" => "user_externo                    ",
                 ];
-                if(Auth::attempt($credentiales1)){
+                if(Auth::attempt($credentiales2)){
                     $request->session()->regenerate();
                     $mess="Sesion Iniciada Usuario Externo";
                     //return view('/pagina_principal/documentos',compact('mess'));
