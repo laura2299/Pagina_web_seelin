@@ -69,7 +69,7 @@
 				@if(isset($mess))
 					{{$mess}}
 					@endif
-				<form method="POST" action="{{ route('cambio_contraseña_U') }}" id="formulario_subir">
+				<form method="POST" action="{{ route('cambio_contrasena_U') }}" id="formulario_subir">
 				@csrf
 					
 					<label for="nueva_contraseña">
@@ -82,7 +82,7 @@
 					</label>
 					<p id="men_fecha"></p>
 				</form>
-				<button id="btn_busc" onclick="verificar()">Buscar</button>
+				<button id="btn_busc" onclick="verificar()">Cambiar</button>
 			</div>
         </div>
     </div>

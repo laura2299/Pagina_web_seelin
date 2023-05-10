@@ -234,7 +234,7 @@
                     
                     @can('cambio_contraseña')
                     <a href="{{ route('finaliza-usuario') }}">Cerrar Sesion</a>
-                    <a href="{{ route('cambio_contraseña') }}">Configuración</a>
+                    <a href="{{ route('cambio_contrasena') }}">Configuración</a>
                     @endcan
                     @can('documentos')
                     <a href="{{ route('documentos') }}">Documentos</a>
@@ -242,7 +242,12 @@
                     @can('admin.home')
                     <a href="{{ route('/dash') }}">Administrador</a>
                     @endcan
+                    @if (auth()->check())
+                    @else
                     <a href="{{ route('inicio_sesion') }}">Inicio Sesion</a>
+                        
+                    @endif
+                   
                 </div>
                 @can('cambio_contraseña')
                 {{auth()->user()->name}}

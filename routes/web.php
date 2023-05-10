@@ -52,7 +52,7 @@ Route::get('/contactanos', function () {
 
 Route::get('/cambio_contraseña', function () {
     return view('pagina_principal/cambio_contraseña');
-})->middleware('can:cambio_contraseña')->name('cambio_contraseña');
+})->middleware('can:cambio_contraseña')->name('cambio_contrasena');
 
 Route::get('/documentos', function () {
     return view('pagina_principal/documentos');
@@ -116,7 +116,7 @@ Route::controller(ClienteController::class)->group(function () {
     Route::get('/clientes' , 'mostrar' )->name('clientes');
 });
 Route::controller(UserController::class)->group(function () {
-    Route::post('/cambio_contraseña_U' , 'cambio_contra' )->name('cambio_contraseña_U');
+    Route::post('/cambio_contraseña_U' , 'cambio_contra' )->name('cambio_contrasena_U');
 });
 
 
